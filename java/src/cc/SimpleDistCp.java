@@ -3,7 +3,6 @@ package cc;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FSDataOutputStream;
@@ -43,6 +42,7 @@ public class SimpleDistCp  extends Configured implements Tool {
     conf.set("mapred.compress.map.output", "true");
     conf.set("mapred.map.output.compression.codec", "com.hadoop.compression.lzo.LzopCodec");    
         
+    job.setNumReduceTasks(0);
 //    job.setReducerClass(IdentityReducer.class);
     
     job.setJobName(this.getClass().getName());
@@ -61,6 +61,10 @@ public class SimpleDistCp  extends Configured implements Tool {
     
     public void map(LongWritable offset, Text s3key, final Context context) throws IOException, InterruptedException {      
       try {
+        
+        context.setStatus("copying "+s3key.toString());
+        System.err.println("copying "+s3key.toString());
+        
         AWSCredentials awsCredentials = new AWSCredentials(
             context.getConfiguration().get("fs.s3n.awsAccessKeyId"), 
             context.getConfiguration().get("fs.s3n.awsSecretAccessKey")
