@@ -1,12 +1,12 @@
 # playing with the common crawl
 
-<a href="http://www.commoncrawl.org">common crawl</a> is a freely available 25+TB webcrawl.
+*serious work in progess*
 
-see <a href="http://matpalm.com/blog">my blog</a> for more info
+<a href="http://www.commoncrawl.org">common crawl</a> is a freely available 25+TB webcrawl.
 
 ## dependencies
 
-* <a href="http://jets3t.s3.amazonaws.com/index.html">jets3t</a> for getting data
+* <a href="http://jets3t.s3.amazonaws.com/index.html">jets3t</a> for getting data (requester pays support)
 * <a href="http://nutch.apache.org/">nutch</a> for the <a href="http://nutch.apache.org/apidocs-1.2/org/apache/nutch/tools/arc/ArcInputFormat.html">ArcInputFormat</a>
 * <a href="http://code.google.com/p/boilerpipe/">boilerpipe</a> for extracting visible text from html (the 
 <a href="http://boilerpipe.googlecode.com/svn/trunk/boilerpipe-core/javadoc/1.0/de/l3s/boilerpipe/extractors/KeepEverythingWithMinKWordsExtractor.html">
