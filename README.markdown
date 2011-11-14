@@ -29,6 +29,10 @@ KeepEverythingWithMinKWordsExtractor</a> has been working well for me...
      -libjars nutch-1.2.jar,boilerpipe-1.2.0.jar,nekohtml-1.9.13.jar,xerces-2.9.1.jar \
      common_crawl_data visible_text
 
- 
- 
+## next
+
+* 1tb grabbed
+* another 9tb should be done by the morning
+* run stanford parser over it
+* port sketch / near duplicate detection algorithm (2 years old!!!) from ruby to pig
 
