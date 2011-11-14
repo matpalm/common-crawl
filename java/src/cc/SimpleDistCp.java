@@ -76,7 +76,10 @@ public class SimpleDistCp  extends Configured implements Tool {
         InputStream input = object.getDataInputStream();
         
         FileSystem fs = FileSystem.get(new Configuration());
-        Path path = new Path(s3key.toString());
+        // can't work out how to recursively define path in ExtractVisibleTextFromArc 
+        // so for now replace / with _#newb
+        String hdfsPath = "common_crawl_data/" + s3key.toString().replaceAll("/","_"); 
+        Path path = new Path(hdfsPath);
         FSDataOutputStream output = fs.create(path, true);
         
         byte[] buffer = new byte[1024 * 1024];
