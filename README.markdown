@@ -1,6 +1,6 @@
 # playing with the common crawl
 
-<a href="http://www.commoncrawl.org">common crawl</a> is a freely available webcrawl.
+<a href="http://www.commoncrawl.org">common crawl</a> is a freely available 25+TB webcrawl.
 
 see <a href="http://matpalm.com/blog">my blog</a> for more info
 
@@ -19,10 +19,15 @@ KeepEverythingWithMinKWordsExtractor</a> has been working well for me...
     zcat arc_files.gz | head -n1000 > sample_arc_file_paths # each arc file is 100mb
     hadoop fs -mkdir manifest
     hadoop fs -copyFromLocal sample_arc_file_paths manifest
-    hadoop jar cc.jar cc.SimpleDistCp -D mapred.max.split.size=250 -D cc.hdfs_path=common_crawl_data manifest stdout
+    hadoop jar cc.jar cc.SimpleDistCp \
+     -D mapred.max.split.size=250 \
+     -D cc.hdfs_path=common_crawl_data/ \
+     manifest stdout
 
     # extract visible text (playing with dependencies still)
-    hadoop jar cc.jar cc.ExtractVisibleTextFromArc -libjars nutch-1.2.jar,boilerpipe-1.2.0.jar,nekohtml-1.9.13.jar,xerces-2.9.1.jar common_crawl_data visible_text
+    hadoop jar cc.jar cc.ExtractVisibleTextFromArc \
+     -libjars nutch-1.2.jar,boilerpipe-1.2.0.jar,nekohtml-1.9.13.jar,xerces-2.9.1.jar \
+     common_crawl_data visible_text
 
  
  
