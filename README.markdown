@@ -15,24 +15,33 @@ KeepEverythingWithMinKWordsExtractor</a> has been working well for me...
 
 ## method
 
-    # get a sample of 100gb; download to common_crawl_data on hdfs
-    zcat arc_files.gz | head -n1000 > sample_arc_file_paths # each arc file is 100mb
-    hadoop fs -mkdir manifest
-    hadoop fs -copyFromLocal sample_arc_file_paths manifest
-    hadoop jar cc.jar cc.SimpleDistCp \
-     -D mapred.max.split.size=250 \
-     -D cc.hdfs_path=common_crawl_data/ \
-     manifest stdout
+### pass 1) filter text/html
 
-    # extract visible text (playing with dependencies still)
-    hadoop jar cc.jar cc.ExtractVisibleTextFromArc \
-     -libjars nutch-1.2.jar,boilerpipe-1.2.0.jar,nekohtml-1.9.13.jar,xerces-2.9.1.jar \
-     common_crawl_data visible_text
+single map only pass that using common crawl input format to download 2010 component of dataset, 25TB gzip compressed, 2.4e9 records. 
+filter on mime_type = text/html records 
+emits records; key= url/dts value= html
+reduces dataset to 10TB gzip compressed, 2.1e9 records
 
-## next
+see fetch_text_html.sh
 
-* 1tb grabbed
-* another 9tb should be done by the morning
-* run stanford parser over it
-* port sketch / near duplicate detection algorithm (2 years old!!!) from ruby to pig
+### pass 2) visible text
+
+pass data through <a href="http://code.google.com/p/boilerpipe/">boilerpipe</a> to extract visible text for each webpage. 
+ignore pages that are filtered by <a href="http://boilerpipe.googlecode.com/svn/trunk/boilerpipe-core/javadoc/1.0/de/l3s/boilerpipe/extractors/KeepEverythingWithMinKWordsExtractor.html">KeepEverythingWithMinKWordsExtractor</a> (K=10)
+reduces data to ?? gzip compressed, ? records
+also compacted from 280,000 split files to 3,000 sequence files
+
+see extract_visible_text.sh
+
+reads 280,000 files from pass1) and reduces to 3,000 sequence files
+
+record key is url \t dts
+record value is visible text. multiple line, each line appears to be from a seperate page element.
+
+### pass 4) filter english documents
+
+### pass 5) tokenise with <a href="http://nlp.stanford.edu/software/lex-parser.shtml">the stanford parser</a>
+
+### pass 6) collocation extraction via mutual information
+
 

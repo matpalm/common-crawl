@@ -1,4 +1,7 @@
 set -ex
+
+# deprecated
+
 hadoop fs -mkdir arc_file_manifest/$1
 hadoop fs -copyFromLocal arc_files.$1 arc_file_manifest/$1
 
@@ -15,4 +18,5 @@ hadoop jar cc.jar cc.ExtractVisibleTextFromArc \
  -libjars nutch-1.2.jar,boilerpipe-1.2.0.jar,nekohtml-1.9.13.jar,xerces-2.9.1.jar \
  -D mapred.output.compress=true -D mapred.output.compression.codec=org.apache.hadoop.io.compress.GzipCodec \
  common_crawl_data/$1/ visible_text/$1
+
 
