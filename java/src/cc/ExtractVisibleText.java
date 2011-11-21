@@ -48,9 +48,17 @@ public class ExtractVisibleText extends Configured implements Tool {
     FileInputFormat.addInputPath(conf, new Path(args[0]));            
     FileOutputFormat.setOutputPath(conf, new Path(args[1]));
     
-    conf.set("mapred.map.max.attempts", "20");
+    // turn up attempts and enable skipping
+    conf.set("mapred.map.max.attempts", "30");
     conf.set("mapred.skip.map.max.skip.records", "1000");
 
+    // sequence file output
+    conf.set("mapred.output.compress", "true");
+    conf.set("mapred.output.compression.type", "BLOCK");
+    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
+
+    conf.setNumReduceTasks(0);
+    
     JobClient.runJob(conf);
     
     return 0;
@@ -63,24 +71,40 @@ public class ExtractVisibleText extends Configured implements Tool {
 
     public void map(Text url_dts, Text html, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
 
-      try {        
-        String visibleText = extractor.getText(html.toString());
+      try {
+        
+        long start = System.currentTimeMillis();
+        String visibleText = extractor.getText(html.toString()).trim();
+        long totalTime = System.currentTimeMillis() - start;
+
+        if (totalTime<1000) {
+          reporter.getCounter("extractor_time", "< 1s").increment(1); 
+        } else if (totalTime<10000) {
+          reporter.getCounter("extractor_time", "< 10s").increment(1);           
+        } else if (totalTime<100000) {
+          reporter.getCounter("extractor_time", "< 100s").increment(1); 
+        } else {
+          reporter.getCounter("extractor_time", ">= 100s").increment(1);
+        }
+        
+        if (visibleText.indexOf(" ") == -1) {
+          reporter.getCounter("parser", "no_spaces_in_visible_text").increment(1);      
+          return;
+        }
+        
         collector.collect(new Text(url_dts), new Text(visibleText));
       }
       catch(StackOverflowError so) {
         // neko html parser (?)
         reporter.getCounter("exception", "stack_overflow").increment(1);        
-        System.err.println("stack_overflow on "+url_dts.toString());
       }
       catch(OutOfMemoryError oom) {   
         // tread super carefully catching with one!
         reporter.getCounter("exception", "oom").increment(1);
-        System.err.println("oom on "+url_dts.toString());
         extractor = new KeepEverythingWithMinKWordsExtractor(10); 
       }      
       catch(Exception e) {        
         reporter.getCounter("exception", "exception_"+e.getClass().getName()).increment(1);
-        System.err.println("exception on "+url_dts.toString());
       }
       
     }

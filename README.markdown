@@ -22,21 +22,28 @@ filter on mime_type = text/html records
 emits records; key= url/dts value= html
 reduces dataset to 10TB gzip compressed, 2.1e9 records
 
-see fetch_text_html.sh
+    see fetch_text_html.sh
 
 ### pass 2) visible text
 
 pass data through <a href="http://code.google.com/p/boilerpipe/">boilerpipe</a> to extract visible text for each webpage. 
+
 ignore pages that are filtered by <a href="http://boilerpipe.googlecode.com/svn/trunk/boilerpipe-core/javadoc/1.0/de/l3s/boilerpipe/extractors/KeepEverythingWithMinKWordsExtractor.html">KeepEverythingWithMinKWordsExtractor</a> (K=10)
-reduces data to ?? gzip compressed, ? records
-also compacted from 280,000 split files to 3,000 sequence files
 
-see extract_visible_text.sh
-
-reads 280,000 files from pass1) and reduces to 3,000 sequence files
+ignore pages that have have no spaces
 
 record key is url \t dts
 record value is visible text. multiple line, each line appears to be from a seperate page element.
+
+reduces data to ?? gzip compressed, ? records
+
+    see extract_visible_text.sh
+
+### pass 3) compact
+
+reads 280,000 files from pass2) and reduces to 3,000 sequence files
+
+    hadoop jar cc.jar cc.Compact -D mapred.reduce.tasks=123 input_dir output_dir
 
 ### pass 4) filter english documents
 
