@@ -11,13 +11,34 @@
 * <a href="http://code.google.com/p/boilerpipe/">boilerpipe</a> for extracting visible text from html (the 
 <a href="http://boilerpipe.googlecode.com/svn/trunk/boilerpipe-core/javadoc/1.0/de/l3s/boilerpipe/extractors/KeepEverythingWithMinKWordsExtractor.html">
 KeepEverythingWithMinKWordsExtractor</a> has been working well for me...
+* <a href="http://tika.apache.org/">tika</a> for language detection.
 * <a href="http://nlp.stanford.edu/software/lex-parser.shtml">the stanford parser</a> for general NLP witchcraft.
 
 ## method
 
+### pass 0) download the data
+
+download the data using jets3t. was using common crawl input format (which did the download) but had lots of problems.
+
+    see simple_dist_cp.sh
+
 ### pass 1) filter text/html
 
-single map only pass that using common crawl input format to download 2010 component of dataset, 25TB gzip compressed, 2.4e9 records. 
+single map only pass that uses the nutch arc input format
+
+ignore everything but mime_type 'text/html'
+
+pass html through boilerpipe
+
+pass visible text through tika to identify language
+
+ignore everything but language 'en'
+ 
+    see extract_visible_english_text.sh
+
+************** TODO 
+
+
 filter on mime_type = text/html records 
 emits records; key= url/dts value= html
 reduces dataset to 10TB gzip compressed, 2.1e9 records
@@ -35,7 +56,7 @@ ignore pages that have have no spaces
 record key is url \t dts
 record value is visible text. multiple line, each line appears to be from a seperate page element.
 
-reduces data to ?? gzip compressed, ? records
+reduces data to ?? gzip compressed
 
     see extract_visible_text.sh
 

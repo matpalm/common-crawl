@@ -17,6 +17,9 @@ import org.apache.hadoop.util.ToolRunner;
 import org.commoncrawl.hadoop.io.ARCInputFormat;
 import org.commoncrawl.protocol.shared.ArcFileItem;
 
+/**
+ * @deprecated org.commoncrawl.hadoop.io.ARCInputFormat is painful
+ */
 public class FetchTextHtml extends Configured implements Tool {
 
   public static void main(String args[]) throws Exception {
