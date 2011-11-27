@@ -1,7 +1,7 @@
 package cc;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.util.List;
 
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -15,16 +15,19 @@ import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapred.Mapper;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapred.SequenceFileInputFormat;
 import org.apache.hadoop.mapred.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.nutch.tools.arc.ArcInputFormat;
 import org.apache.tika.language.LanguageIdentifier;
 
-public class FilterTextHtml extends Configured implements Tool {
+import cc.util.SentenceTokeniser;
+
+public class TokeniseSentences extends Configured implements Tool {
 
   public static void main(String args[]) throws Exception {
-    ToolRunner.run(new FilterTextHtml(), args);
+    ToolRunner.run(new TokeniseSentences(), args);
   }
     
   public int run(String[] args) throws Exception {
@@ -43,8 +46,8 @@ public class FilterTextHtml extends Configured implements Tool {
     
     conf.setNumReduceTasks(0);
     
-    conf.setInputFormat(ArcInputFormat.class);
-    conf.setMapperClass(FilterTextHtmlMapper.class);    
+    conf.setInputFormat(SequenceFileInputFormat.class);
+    conf.setMapperClass(TokeniseSentencesMapper.class);    
     
     FileInputFormat.addInputPath(conf, new Path(args[0]));
     FileOutputFormat.setOutputPath(conf, new Path(args[1]));
@@ -54,40 +57,38 @@ public class FilterTextHtml extends Configured implements Tool {
 
     return 0;
   }
-  
-  private static class FilterTextHtmlMapper extends MapReduceBase implements Mapper<Text,BytesWritable,Text,Text> {
-    enum COLUMNS { URL, IP, DTS, MIME_TYPE, SIZE };    
-    
-    public void map(Text k, BytesWritable v, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
-   
-      try {
-        String headerColumns[] = k.toString().split(" ");      
-        if (headerColumns.length != COLUMNS.values().length) {
-          System.err.println("dodgy header row? ["+k+"]");
-          reporter.getCounter("FilterTextHtml", "dodgy_header").increment(1);
-          return;
-        }
-        
-        String mime_type = headerColumns[COLUMNS.MIME_TYPE.ordinal()];
-        reporter.getCounter("FilterTextHtml.mime_types", mime_type).increment(1);        
-        if (!"text/html".equals(mime_type)) {
-          return;
-        }
-          
-        // strip header off response        
-        String httpResponse = new String(v.getBytes(), 0, v.getLength(), "ISO-8859-1");
-        int htmlStartIdx = httpResponse.indexOf("\r\n\r\n"); // ie end of header      
-        String html = httpResponse.substring(htmlStartIdx);
 
-        // emit
-        String url = headerColumns[COLUMNS.URL.ordinal()];
-        String dts = headerColumns[COLUMNS.DTS.ordinal()];
+  
+  private static class TokeniseSentencesMapper extends MapReduceBase implements Mapper<Text,Text,Text,Text> {
+    
+    private SentenceTokeniser sentenceTokeniser = new SentenceTokeniser();
+    
+    public void map(Text url_dts, Text visibleText, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
+      
+      try {
+        
+        int sentenceIdx = 0;       
+        for (String chunk : visibleText.toString().split("\n")) {          
+          try {
+            for(String sentence : sentenceTokeniser.extractSentences(chunk)) {
+              if (sentence.split(" ").length >= 3) {
+                System.err.println("chunk = "+chunk);
+                collector.collect(new Text(url_dts.toString()+" "+(sentenceIdx++)), new Text(sentence));
+              }
+              else {
+                reporter.getCounter("TokeniseSentences", "sentence_too_short").increment(1);
+              }
+            }
+          }
+          catch(Exception e) {        
+            reporter.getCounter("TokeniseSentences.tokenise.exception", e.getClass().getSimpleName()).increment(1);
+          }
           
-        collector.collect(new Text(url+" "+dts), new Text(html));
+        }
         
       }      
       catch(Exception e) {        
-        reporter.getCounter("FilterTextHtml.exception", e.getClass().getSimpleName()).increment(1);
+        reporter.getCounter("TokeniseSentences.general.exception", e.getClass().getSimpleName()).increment(1);
       }
       
     }   

@@ -28,12 +28,20 @@ single map only pass that uses the nutch arc input format
 
 ignore everything but mime_type 'text/html'
 
-pass html through boilerpipe
+want to just have this so can do experiments in either link graph or visible text
+
+    see filter_text_html.sh
+
+### pass 2 ) visible text extraction
+
+pass html through boilerpipe to get visible text
 
 pass visible text through tika to identify language
 
 ignore everything but language 'en'
  
+emit into sequence file with reduce step to compact into fewer files
+
     see extract_visible_english_text.sh
 
 ************** TODO 

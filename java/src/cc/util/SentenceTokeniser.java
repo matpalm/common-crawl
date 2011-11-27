@@ -1,4 +1,4 @@
-package cc;
+package cc.util;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -51,11 +51,11 @@ public class SentenceTokeniser implements Iterable<List<HasWord>> {
     
     List<String> sentences = new ArrayList<String>();
     for (List<HasWord> sentence : this) {
-      StringBuilder sentBuffer = new StringBuilder();
+      StringBuilder sentenceBuffer = new StringBuilder();
       for (HasWord word : sentence) {
-        sentBuffer.append(word.word()+" ");
+        sentenceBuffer.append(word.word()+" ");
       }
-      String sentenceWithoutTrailingSpace = sentBuffer.toString().substring(0, sentBuffer.length()-1); 
+      String sentenceWithoutTrailingSpace = sentenceBuffer.toString().substring(0, sentenceBuffer.length()-1); 
       sentences.add(sentenceWithoutTrailingSpace); 
     }
     return sentences;

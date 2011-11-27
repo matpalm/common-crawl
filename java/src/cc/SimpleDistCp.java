@@ -37,7 +37,7 @@ public class SimpleDistCp  extends Configured implements Tool {
     
   public int run(String[] args) throws Exception {
     if (args.length!=2) {
-      throw new RuntimeException("usage: SimpleDistCp <mainfest_dir> <hdfs_path>");
+      throw new RuntimeException("usage: SimpleDistCp <mainfest_dir> <hdfs_output_path>");
     }        
     
     String hdfsPath = args[1];
@@ -62,7 +62,7 @@ public class SimpleDistCp  extends Configured implements Tool {
     job.setJarByClass(SimpleDistCp.class);
 
     FileInputFormat.addInputPath(job, new Path(args[0]));        
-    FileOutputFormat.setOutputPath(job, new Path("SimpleDistCp."+System.currentTimeMillis()));
+    FileOutputFormat.setOutputPath(job, new Path("SimpleDistCp.out"));
 
     job.waitForCompletion(true);
     return 0;
@@ -86,9 +86,8 @@ public class SimpleDistCp  extends Configured implements Tool {
           FSDataOutputStream hdfsFile = createHdfsFileFor(s3key, context);
           
           copy(s3object, hdfsFile, context);          
-          
-          return;
-          
+                    
+          s3Client.shutdown();
         } 
         catch (Exception e) {
           context.getCounter("exception", e.getClass().getSimpleName()).increment(1);
@@ -101,7 +100,7 @@ public class SimpleDistCp  extends Configured implements Tool {
     }
 
     private FSDataOutputStream createHdfsFileFor(Text s3key, final Context context) throws IOException {    
-      String hdfsPath = context.getConfiguration().get(CC_HDFS_PATH)+s3key.toString();       
+      String hdfsPath = context.getConfiguration().get(CC_HDFS_PATH) + s3key.toString();       
       return FileSystem.get(new Configuration()).create(new Path(hdfsPath), (short)2);      
     }
 
@@ -131,8 +130,8 @@ public class SimpleDistCp  extends Configured implements Tool {
       while (buffer.hasRemaining()) {
         output.write(buffer);
        }
-      output.close();
-      input.close();      
+      inputStream.close();
+      outputStream.close();      
     }
     
   }
