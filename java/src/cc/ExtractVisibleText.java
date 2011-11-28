@@ -58,11 +58,11 @@ public class ExtractVisibleText extends Configured implements Tool {
   }
 
   
-  private static class ExtractVisibleTextMapper extends MapReduceBase implements Mapper<Text,Text,Text,Text> {
+  public static class ExtractVisibleTextMapper extends MapReduceBase implements Mapper<Text,Text,Text,Text> {
     
     private ExtractorBase extractor = new KeepEverythingWithMinKWordsExtractor(5);
     
-    public void map(Text url_dts, Text html, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
+    public void map(Text header, Text html, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
    
       try {
           
@@ -77,8 +77,8 @@ public class ExtractVisibleText extends Configured implements Tool {
           return;
         }
         
-        collector.collect(url_dts, new Text(visibleText));
-        
+        reporter.getCounter("ExtractVisibleText", "has_visible_text").increment(1);
+        collector.collect(header, new Text(visibleText));
       }      
       catch(Exception e) {        
         reporter.getCounter("ExtractVisibleText.exception", e.getClass().getSimpleName()).increment(1);

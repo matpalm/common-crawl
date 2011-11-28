@@ -1,7 +1,8 @@
 package cc;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.io.InputStream;
 
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -19,7 +20,8 @@ import org.apache.hadoop.mapred.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.nutch.tools.arc.ArcInputFormat;
-import org.apache.tika.language.LanguageIdentifier;
+import org.apache.tika.parser.txt.CharsetDetector;
+import org.apache.tika.parser.txt.CharsetMatch;
 
 public class FilterTextHtml extends Configured implements Tool {
 
@@ -39,7 +41,8 @@ public class FilterTextHtml extends Configured implements Tool {
     conf.setOutputKeyClass(Text.class);
     conf.setOutputValueClass(Text.class);
     conf.set("mapred.output.compress", "true");
-//    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
+    conf.set("mapred.output.compression.type", "BLOCK");
+    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
     
     conf.setNumReduceTasks(0);
     
@@ -55,7 +58,9 @@ public class FilterTextHtml extends Configured implements Tool {
     return 0;
   }
   
-  private static class FilterTextHtmlMapper extends MapReduceBase implements Mapper<Text,BytesWritable,Text,Text> {
+  public static class FilterTextHtmlMapper extends MapReduceBase implements Mapper<Text,BytesWritable,Text,Text> {
+    private static final String UNKNOWN = "unknown";
+
     enum COLUMNS { URL, IP, DTS, MIME_TYPE, SIZE };    
     
     public void map(Text k, BytesWritable v, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
@@ -74,24 +79,46 @@ public class FilterTextHtml extends Configured implements Tool {
           return;
         }
           
-        // strip header off response        
-        String httpResponse = new String(v.getBytes(), 0, v.getLength(), "ISO-8859-1");
-        int htmlStartIdx = httpResponse.indexOf("\r\n\r\n"); // ie end of header      
-        String html = httpResponse.substring(htmlStartIdx);
-
+        // search for end of header   
+        int headerLength = locateEndOfHeader(v.getBytes());
+                               
+        // try to determine character encoding for rest of response        
+        InputStream responseBytes = new ByteArrayInputStream(v.getBytes(), headerLength + 4, v.getLength() - headerLength - 4);
+        CharsetMatch charset = new CharsetDetector().setText(responseBytes).detect();                
+        
+        // fetch http response as decoded by CharsetDetector 
+        String decodedHttpResponse;        
+        try {
+          decodedHttpResponse = charset.getString();
+        }
+        catch (NullPointerException e) {
+          // unexplainable cases of CharsetMatch throwing null pointer for what looks to be sane text ?
+          // just use string as best bet
+          decodedHttpResponse = new String(v.getBytes(), headerLength + 4, v.getLength() - headerLength - 4);
+          reporter.getCounter("FilterTextHtml", "nullptr_in_CharsetMatch").increment(1);
+        }
+        
         // emit
         String url = headerColumns[COLUMNS.URL.ordinal()];
         String dts = headerColumns[COLUMNS.DTS.ordinal()];
-          
-        collector.collect(new Text(url+" "+dts), new Text(html));
+        collector.collect(new Text(url+" "+dts), new Text(decodedHttpResponse));
         
       }      
       catch(Exception e) {        
+        e.printStackTrace();
         reporter.getCounter("FilterTextHtml.exception", e.getClass().getSimpleName()).increment(1);
       }
       
     }   
     
+    private int locateEndOfHeader(byte[] b) {      
+      for(int idx=0; idx<b.length-4; idx++) {
+        if (b[idx]==0x0d && b[idx+1]==0x0a && b[idx+2]==0x0d && b[idx+3]==0x0a)
+          return idx;
+      }        
+      throw new RuntimeException("couldn't find end of header");
+    }   
+   
   }
   
 }

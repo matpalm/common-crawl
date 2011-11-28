@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
@@ -18,11 +17,7 @@ import org.apache.hadoop.mapred.SequenceFileInputFormat;
 import org.apache.hadoop.mapred.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.apache.nutch.tools.arc.ArcInputFormat;
 import org.apache.tika.language.LanguageIdentifier;
-
-import de.l3s.boilerpipe.extractors.ExtractorBase;
-import de.l3s.boilerpipe.extractors.KeepEverythingWithMinKWordsExtractor;
 
 public class FilterEnglish extends Configured implements Tool {
 
@@ -42,7 +37,8 @@ public class FilterEnglish extends Configured implements Tool {
     conf.setOutputKeyClass(Text.class);
     conf.setOutputValueClass(Text.class);
     conf.set("mapred.output.compress", "true");
-//    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
+    conf.set("mapred.output.compression.type", "BLOCK");
+    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
     
     conf.setNumReduceTasks(0);
     
@@ -59,17 +55,17 @@ public class FilterEnglish extends Configured implements Tool {
   }
 
   
-  private static class FilterEnglishMapper extends MapReduceBase implements Mapper<Text,Text,Text,Text> {
+  public static class FilterEnglishMapper extends MapReduceBase implements Mapper<Text,Text,Text,Text> {
     
-    public void map(Text url_dts, Text visibleText, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
+    public void map(Text header, Text visibleText, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
    
       try {
-                
+        
         String language = new LanguageIdentifier(visibleText.toString()).getLanguage();
         reporter.getCounter("FilterEnglish.language", language).increment(1);        
         
         if ("en".equals(language)) {
-          collector.collect( new Text(url_dts.toString()), new Text(visibleText));
+          collector.collect( new Text(header.toString()), new Text(visibleText));
         }
         
       }      
