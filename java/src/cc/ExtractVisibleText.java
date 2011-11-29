@@ -40,8 +40,7 @@ public class ExtractVisibleText extends Configured implements Tool {
     conf.setOutputValueClass(Text.class);
     conf.set("mapred.output.compress", "true");
     conf.set("mapred.output.compression.type", "BLOCK");
-
-//    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
+    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
     
     conf.setNumReduceTasks(0);
     

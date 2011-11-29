@@ -13,17 +13,27 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapred.FileInputFormat;
+import org.apache.hadoop.mapred.FileOutputFormat;
+import org.apache.hadoop.mapred.JobClient;
+import org.apache.hadoop.mapred.JobConf;
+import org.apache.hadoop.mapred.MapReduceBase;
+import org.apache.hadoop.mapred.Mapper;
+import org.apache.hadoop.mapred.OutputCollector;
+import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapred.SequenceFileOutputFormat;
+import org.apache.hadoop.mapred.lib.MultithreadedMapRunner;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.apache.nutch.tools.arc.ArcInputFormat;
 import org.jets3t.service.S3ServiceException;
 import org.jets3t.service.impl.rest.httpclient.RestS3Service;
 import org.jets3t.service.security.AWSCredentials;
+
+import cc.FilterTextHtml.FilterTextHtmlMapper;
 
 public class SimpleDistCp  extends Configured implements Tool {
   
@@ -45,77 +55,111 @@ public class SimpleDistCp  extends Configured implements Tool {
     }
     getConf().set(CC_HDFS_PATH, hdfsPath);
     
-    final Configuration conf = new Configuration(getConf());    
+    JobConf conf = new JobConf(getConf(), getClass());    
+    conf.setJobName(getClass().getName());
     
-    Job job = new Job(conf);
-    
-    job.setMapperClass(SimpleDistCpMapper.class);
-    job.setMapOutputKeyClass(Text.class);
-    job.setMapOutputValueClass(Text.class);
+    conf.setOutputKeyClass(Text.class);
+    conf.setOutputValueClass(Text.class);
     conf.set("mapred.output.compress", "true");
-    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");    
+    conf.set("mapred.output.compression.type", "BLOCK");
+    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
+
     conf.set("mapred.map.tasks.speculative.execution", "false");
-    job.setNumReduceTasks(0);
+
+    conf.setNumReduceTasks(0);
     
-    job.setJobName(this.getClass().getName());
-    job.setJarByClass(SimpleDistCp.class);
+    conf.setMapperClass(SimpleDistCpMapper.class);    
+    conf.setMapRunnerClass(MultithreadedMapRunner.class);    
+    
+    FileInputFormat.addInputPath(conf, new Path(args[0]));
+    FileOutputFormat.setOutputPath(conf, new Path(args[1]));
+    conf.setOutputFormat(SequenceFileOutputFormat.class);
+    
+    JobClient.runJob(conf);
 
-    FileInputFormat.addInputPath(job, new Path(args[0]));        
-    FileOutputFormat.setOutputPath(job, new Path("SimpleDistCp.out"));
-
-    job.waitForCompletion(true);
-    return 0;
+    return 0;    
   }    
   
-  private static class SimpleDistCpMapper extends Mapper<LongWritable,Text,Text,Text> {
-    
-    public void map(LongWritable offset, Text s3key, final Context context) throws IOException, InterruptedException {      
+  private static class SimpleDistCpMapper extends MapReduceBase implements Mapper<LongWritable,Text,Text,Text> {
         
-      int attempts = 0;
-      
+    private String ccHdfsPath, awsAccessKeyId, awsSecretAccessKey;
+    private FileSystem filesystem;
+    
+    public void configure(JobConf job) { 
+      super.configure(job);
+      ccHdfsPath = job.get(CC_HDFS_PATH);
+      awsAccessKeyId = job.get("fs.s3n.awsAccessKeyId");
+      awsSecretAccessKey = job.get("fs.s3n.awsSecretAccessKey");
+      try {
+        filesystem = FileSystem.get(new Configuration());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    public void map(LongWritable k, Text s3key, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
+        
+      int attempts = 0;      
       while(attempts < MAX_RETRIES) {
+        
+        InputStream s3object = null;
+        FSDataOutputStream hdfsFile = null;
+        
         try {
-          context.setStatus("copying "+s3key.toString()+" attempts="+attempts);
-          System.err.println("copying "+s3key.toString()+" attempts="+attempts);
-
-          RestS3Service s3Client = newS3Client(context);
+          String logmsg = Thread.currentThread().getName()+
+                          " copying "+s3key.toString()+
+                          " to "+hdfsPathForKey(s3key).toString()+
+                          " attempts="+attempts;
+          reporter.setStatus(logmsg);
+          System.err.println(logmsg);
+         
+          RestS3Service s3Client = newS3Client();          
+          s3object = s3Client.getObject("commoncrawl-crawl-002", s3key.toString()).getDataInputStream();                  
+          hdfsFile = createHdfsFileFor(s3key);   
           
-          InputStream s3object = s3Client.getObject("commoncrawl-crawl-002", s3key.toString()).getDataInputStream();        
+          copy(s3object, hdfsFile, reporter);                              
           
-          FSDataOutputStream hdfsFile = createHdfsFileFor(s3key, context);
-          
-          copy(s3object, hdfsFile, context);          
-                    
+          s3object.close();
+          hdfsFile.close();
           s3Client.shutdown();
+          
+          return;
         } 
         catch (Exception e) {
-          context.getCounter("exception", e.getClass().getSimpleName()).increment(1);
+          // clean up attempt
+          if (s3object!=null) s3object.close();
+          if (hdfsFile!=null) hdfsFile.close();              
+          filesystem.delete(hdfsPathForKey(s3key), true);
+
+          // report
+          e.printStackTrace();
+          reporter.getCounter("exception", e.getClass().getName()).increment(1);
           attempts++;
           try { Thread.sleep(attempts*1000); } catch (InterruptedException ignore) { }
-          context.progress();
+          reporter.progress();
         }          
       }
-      
+      reporter.setStatus("failed to download "+s3key.toString());
+      System.err.println("failed to download "+s3key.toString());
+      reporter.getCounter("error","exceeded_max_attempts_to_dload").increment(1);
     }
 
-    private FSDataOutputStream createHdfsFileFor(Text s3key, final Context context) throws IOException {    
-      String hdfsPath = context.getConfiguration().get(CC_HDFS_PATH) + s3key.toString();       
-      return FileSystem.get(new Configuration()).create(new Path(hdfsPath), (short)2);      
+    private FSDataOutputStream createHdfsFileFor(Text s3key) throws IOException {    
+      return filesystem.create(hdfsPathForKey(s3key), (short)2);      
     }
 
-    private RestS3Service newS3Client(final Context context) throws S3ServiceException {
-      AWSCredentials awsCredentials = new AWSCredentials(
-          context.getConfiguration().get("fs.s3n.awsAccessKeyId"), 
-          context.getConfiguration().get("fs.s3n.awsSecretAccessKey")
-      );    
-      
+    private Path hdfsPathForKey(Text s3key) {
+      return new Path(ccHdfsPath + s3key.toString());     
+    }
+    
+    private RestS3Service newS3Client() throws S3ServiceException {
+      AWSCredentials awsCredentials = new AWSCredentials(awsAccessKeyId, awsSecretAccessKey);      
       RestS3Service s3Service = new RestS3Service(awsCredentials);
-      s3Service.setRequesterPaysEnabled(true);
-      
+      s3Service.setRequesterPaysEnabled(true);      
       return s3Service;
     }
     
-    private void copy(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+    private void copy(InputStream inputStream, OutputStream outputStream, Reporter reporter) throws IOException {
       final ReadableByteChannel input  = Channels.newChannel(inputStream);
       final WritableByteChannel output = Channels.newChannel(outputStream);        
       ByteBuffer buffer = ByteBuffer.allocateDirect(64 * 1024);
@@ -123,7 +167,7 @@ public class SimpleDistCp  extends Configured implements Tool {
         buffer.flip();
         output.write(buffer);
         buffer.compact();
-        context.progress();
+        reporter.progress();
       }
       buffer.flip();
       while (buffer.hasRemaining()) {

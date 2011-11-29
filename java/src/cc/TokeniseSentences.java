@@ -1,6 +1,8 @@
 package cc;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -62,30 +64,53 @@ public class TokeniseSentences extends Configured implements Tool {
         
     private SentenceTokeniser sentenceTokeniser = new SentenceTokeniser();
     
-    public void map(Text url_dts, Text visibleText, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
+    public void map(Text header, Text visibleText, OutputCollector<Text, Text> collector, Reporter reporter) throws IOException {
       
       try {
+        Set<String> seenSentences = new HashSet<String>();
         
-        int sentenceIdx = 0;       
-        for (String chunk : visibleText.toString().split("\n")) {          
+        int sentencesEmitted = 0;
+        int sentencesTooShort = 0;
+        int duplicateSentences = 0;
+
+        // a double nested for with a double nested if!
+        // i.. am.. going.. straight.. to.. hell :/
+        int paragraphIdx = 0;
+        int sentenceInParagraphIdx = 0;
+        for (String paragraph : visibleText.toString().split("\n")) {
           try {
-            for(String sentence : sentenceTokeniser.extractSentences(chunk)) {
-              if (sentence.split(" ").length >= MIN_TOKENS_IN_SENTENCE) {
-                System.err.println("chunk = "+chunk);
-                collector.collect(new Text(url_dts.toString()+" "+(sentenceIdx++)), new Text(sentence));
+            sentenceInParagraphIdx = 0;
+            for(String sentence : sentenceTokeniser.extractSentences(paragraph)) {
+              int numTokens = sentence.split(" ").length;
+              if (numTokens >= MIN_TOKENS_IN_SENTENCE) {
+                if (seenSentences.contains(sentence)) {
+                  duplicateSentences++;
+                }
+                else {
+                  collector.collect(
+                      new Text(header.toString()+"\t"+paragraphIdx+"\t"+sentenceInParagraphIdx), 
+                      new Text(sentence)
+                  );
+                  sentencesEmitted++;
+                  seenSentences.add(sentence);
+                  sentenceInParagraphIdx++;
+                }
               }
               else {
-                reporter.getCounter("TokeniseSentences", "num_sentences_too_short").increment(1);
+                sentencesTooShort++;
               }
             }
+            paragraphIdx++;
           }
           catch(Exception e) {        
             reporter.getCounter("TokeniseSentences.tokenise.exception", e.getClass().getSimpleName()).increment(1);
           }          
         }
         
+        reporter.getCounter("TokeniseSentences", "duplicate_sentences").increment(duplicateSentences);
+        reporter.getCounter("TokeniseSentences", "num_sentences_too_short").increment(sentencesTooShort);
         reporter.getCounter("TokeniseSentences", "num_input_records").increment(1);
-        reporter.getCounter("TokeniseSentences", "num_sentences_emitted").increment(sentenceIdx);
+        reporter.getCounter("TokeniseSentences", "num_sentences_emitted").increment(sentencesEmitted);
         
       }      
       catch(Exception e) {        

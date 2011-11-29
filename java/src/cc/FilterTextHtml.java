@@ -82,7 +82,8 @@ public class FilterTextHtml extends Configured implements Tool {
         // search for end of header   
         int headerLength = locateEndOfHeader(v.getBytes());
                                
-        // try to determine character encoding for rest of response        
+        // try to determine character encoding for rest of response    
+        // ( 4 bytes for the header/body seperator 0d 0a 0d 0a
         InputStream responseBytes = new ByteArrayInputStream(v.getBytes(), headerLength + 4, v.getLength() - headerLength - 4);
         CharsetMatch charset = new CharsetDetector().setText(responseBytes).detect();                
         
@@ -100,8 +101,9 @@ public class FilterTextHtml extends Configured implements Tool {
         
         // emit
         String url = headerColumns[COLUMNS.URL.ordinal()];
-        String dts = headerColumns[COLUMNS.DTS.ordinal()];
-        collector.collect(new Text(url+" "+dts), new Text(decodedHttpResponse));
+//        String tld = topLevelDomain(url);
+//        String dts = headerColumns[COLUMNS.DTS.ordinal()];
+        collector.collect(new Text(url), new Text(decodedHttpResponse));
         
       }      
       catch(Exception e) {        
@@ -119,6 +121,16 @@ public class FilterTextHtml extends Configured implements Tool {
       throw new RuntimeException("couldn't find end of header");
     }   
    
+    private String topLevelDomain(String url) {
+      url = url.replaceFirst("^http://","");
+      
+      int firstSlashIdx = url.indexOf("/");
+      if (firstSlashIdx!=-1) {
+        url = url.substring(0, firstSlashIdx);
+      }
+      
+      return url;
+    }    
   }
   
 }

@@ -65,7 +65,7 @@ public class FilterEnglish extends Configured implements Tool {
         reporter.getCounter("FilterEnglish.language", language).increment(1);        
         
         if ("en".equals(language)) {
-          collector.collect( new Text(header.toString()), new Text(visibleText));
+          collector.collect(header, visibleText);
         }
         
       }      
