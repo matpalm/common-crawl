@@ -100,7 +100,8 @@ public class TokeniseSentences extends Configured implements Tool {
                 sentencesTooShort++;
               }
             }
-            paragraphIdx++;
+            if (sentenceInParagraphIdx != 0) // ie there was at least one sentence
+              paragraphIdx++;
           }
           catch(Exception e) {        
             reporter.getCounter("TokeniseSentences.tokenise.exception", e.getClass().getSimpleName()).increment(1);
