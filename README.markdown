@@ -18,55 +18,56 @@ KeepEverythingWithMinKWordsExtractor</a> has been working well for me...
 
 ### pass 0) download the data
 
-download the data using jets3t. was using common crawl input format (which did the download) but had lots of problems.
+download the data using jets3t from s3 unmodified to hdfs. was using common crawl input format (which did the download) but had lots of problems.
 
 see simple_dist_cp.sh
 
 ### pass 1) filter text/html
 
-single map only pass that uses the nutch arc input format
+map only pass using the nutch arc input format to ignore everything but mime_type 'text/html'
 
-ignore everything but mime_type 'text/html'
+also converts from raw http response (ie ascii headers + encoded bytes) to just utf-8 encoded html
 
 want to just have this so can do experiments in either link graph or visible text
 
-outputs (as sequence file)
-key: url
-value: html
+outputs (as sequence file) key: url, value: html response (utf-8 encoded)
 
 see text_html.sh
   
 ### pass 2 ) visible text extraction
 
-pass html through boilerpipe to get visible text
+map only pass html through boilerpipe to extract visible text
 
-pass visible text through tika to identify language
+uses the boilerpipe KeepEverythingWithMinKWordsExtractor to ignore block elements that don't have at least 5 terms
 
-ignore everything but language 'en'
+outputs (as sequence file) key: url, value: visible text, each line denotes a seperate block element from html
+
+### pass 3) filter english text only
+
+map only pass visible text through tika to identify language and ignore everything but language 'en'
  
-outputs (as sequence file)
-key: url
-value: visible text, each line represents text from a block element of html; i'll call this a paragraph from now on
+outputs (as sequence file) key: url value: visible text
 
 see visible_en_text.sh
 
-### pass 3 ) tokenisation
+### pass 4 ) tokenisation
 
-pass visible text, a paragraph at a time, through stanford parser and extract sentences / tokens
+map/reduce pass visible text, a paragraph at a time, through the stanford parser and extract sentences / tokens
 
-we only emit each sentence _once_ per page since the vast majority represent noise (header/footer/list structures etc)
+ignore a sentence that tokens to less than 3 terms.
 
-outputs (as sequence file)
-key: url \t paragraph_idx \t sentence_in_paragraph_idx
-value: one sentence, tokens space seperated
+only emit each sentence _once_ per page since the vast majority of these duplicates represent noise (headers / footers / list structures etc)
+
+outputs (as sequence file) key: url \t paragraph_idx \t sentence_in_paragraph_idx value: one sentence, tokens space seperated
+
+#reducers ~= 3gb to get under 5gb s3 limit (ie sans multipart upload)
 
 see sentences.sh
 
+### pass 2 -> pass 4
 
-from here we have lots of options
+see run.sh for a ChainMapper version that does steps 2 -> 4 in a single map/reduce pass
 
-- remit with just top level domain / sentence and dedup
-- deduping at page level
 
 
 

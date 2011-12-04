@@ -19,16 +19,20 @@ public class Compact extends Configured implements Tool {
   }
     
   public int run(String[] args) throws Exception {
-    if (args.length!=2) {
-      throw new RuntimeException("usage: "+this.getClass().getSimpleName()+" <input> <output>");
+    if (args.length<2) {
+      throw new RuntimeException("usage: "+this.getClass().getSimpleName()+" <input> <input> ... <output>");
     }
     
     JobConf conf = new JobConf(getConf(), getClass());
     
     conf.setJobName(this.getClass().getName());
     
-    FileInputFormat.addInputPath(conf, new Path(args[0]));            
-    FileOutputFormat.setOutputPath(conf, new Path(args[1]));
+    for(int i=0; i<args.length; i++) {
+      if (i!=args.length-1)
+        FileInputFormat.addInputPath(conf, new Path(args[i]));
+      else
+        FileOutputFormat.setOutputPath(conf, new Path(args[i]));
+    }
     
     // sequence file input
     conf.setInputFormat(SequenceFileInputFormat.class);
