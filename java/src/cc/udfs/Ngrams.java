@@ -42,22 +42,25 @@ public class Ngrams extends EvalFunc<DataBag>  {
     return bagify(ngrams(tokens));
   }
    
-  private DataBag bagify(Collection ngrams) {
+  private DataBag bagify(Collection<String> ngrams) {
     DataBag bag = mBagFactory.newDefaultBag();
-    for (Object ngram : ngrams)
-      bag.add(mTupleFactory.newTuple(ngram)); 
+    for (String ngram : ngrams)
+      if (ngramLength==1) 
+        bag.add(mTupleFactory.newTuple(ngram));
+      else
+        bag.add(mTupleFactory.newTuple(Lists.newArrayList(ngram.split(" "))));
     return bag;
   }
   
   private Collection<String> ngrams(String sentence) {     
-    Collection result = distinct ? new HashSet() : new ArrayList();   
+    Collection<String> result = distinct ? new HashSet<String>() : new ArrayList<String>();   
     String[] tokens = sentence.split(" ");
     if (ngramLength==1)
       for(String token : tokens)      
         result.add(token);      
     else // assume bigrams
       for(int i=0; i<tokens.length-1; i++)        
-        result.add(Lists.newArrayList(tokens[i], tokens[i+1]));      
+        result.add(tokens[i]+" "+tokens[i+1]);      
     return result;
   } 
     
