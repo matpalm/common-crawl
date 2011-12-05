@@ -20,4 +20,4 @@ MAP_SLOTS=500
 hadoop jar cc.jar cc.SimpleDistCp \
  -D mapred.map.tasks=$MAP_SLOTS \
  -D mapred.map.multithreadedrunner.threads=5 \
- arc_file_manifest/$1 arc_files
+ arc_file_manifest/$1 arc_files.$1

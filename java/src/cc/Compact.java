@@ -20,7 +20,7 @@ public class Compact extends Configured implements Tool {
     
   public int run(String[] args) throws Exception {
     if (args.length<2) {
-      throw new RuntimeException("usage: "+this.getClass().getSimpleName()+" <input> <input> ... <output>");
+      throw new RuntimeException("usage: "+this.getClass().getSimpleName()+" <input1> <input2> ... <inputN> <output>");
     }
     
     JobConf conf = new JobConf(getConf(), getClass());

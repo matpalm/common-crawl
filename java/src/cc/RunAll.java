@@ -28,7 +28,7 @@ public class RunAll extends Configured implements Tool {
   public int run(String[] args) throws Exception {
     
     if (args.length!=2) {
-      throw new RuntimeException("usage: "+getClass().getName()+" <input> <output>");
+      throw new RuntimeException("usage: "+getClass().getName()+" <input1> <input2> ... <inputN> <output>");
     }
     
     JobConf conf = new JobConf(getConf(), getClass());
@@ -39,11 +39,19 @@ public class RunAll extends Configured implements Tool {
     conf.set("mapred.output.compress", "true");
     conf.set("mapred.output.compression.type", "BLOCK");
     conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
+
+    conf.setMaxMapTaskFailuresPercent(100);
     
-    conf.setNumReduceTasks(0);
-      
     conf.setInputFormat(ArcInputFormat.class);
 
+    for(int i=0; i<args.length; i++) {
+      if (i!=args.length-1)
+        FileInputFormat.addInputPath(conf, new Path(args[i]));
+      else
+        FileOutputFormat.setOutputPath(conf, new Path(args[i]));
+    }
+    conf.setOutputFormat(SequenceFileOutputFormat.class);
+    
     JobConf mapAConf = new JobConf(false);
     ChainMapper.addMapper(conf, FilterTextHtmlMapper.class, 
         Text.class, BytesWritable.class,
@@ -63,11 +71,7 @@ public class RunAll extends Configured implements Tool {
     ChainMapper.addMapper(conf, TokeniseSentencesMapper.class, 
         Text.class, Text.class,
         Text.class, Text.class, true, mapDConf);
-    
-    FileInputFormat.addInputPath(conf, new Path(args[0]));
-    FileOutputFormat.setOutputPath(conf, new Path(args[1]));
-    conf.setOutputFormat(SequenceFileOutputFormat.class);
-    
+        
     JobClient.runJob(conf);
 
     return 0;
