@@ -13,7 +13,6 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
@@ -28,12 +27,11 @@ import org.apache.hadoop.mapred.SequenceFileOutputFormat;
 import org.apache.hadoop.mapred.lib.MultithreadedMapRunner;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.apache.nutch.tools.arc.ArcInputFormat;
-import org.jets3t.service.S3ServiceException;
-import org.jets3t.service.impl.rest.httpclient.RestS3Service;
-import org.jets3t.service.security.AWSCredentials;
 
-import cc.FilterTextHtml.FilterTextHtmlMapper;
+import com.amazonaws.Request;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.handlers.AbstractRequestHandler;
+import com.amazonaws.services.s3.AmazonS3Client;
 
 public class SimpleDistCp  extends Configured implements Tool {
   
@@ -113,8 +111,8 @@ public class SimpleDistCp  extends Configured implements Tool {
           reporter.setStatus(logmsg);
           System.err.println(logmsg);
          
-          RestS3Service s3Client = newS3Client();          
-          s3object = s3Client.getObject("commoncrawl-crawl-002", s3key.toString()).getDataInputStream();                  
+          AmazonS3Client s3Client = newS3Client();          
+          s3object = s3Client.getObject("commoncrawl-crawl-002", s3key.toString()).getObjectContent();                  
           hdfsFile = createHdfsFileFor(s3key);   
           
           copy(s3object, hdfsFile, reporter);                              
@@ -152,11 +150,14 @@ public class SimpleDistCp  extends Configured implements Tool {
       return new Path(ccHdfsPath + s3key.toString());     
     }
     
-    private RestS3Service newS3Client() throws S3ServiceException {
-      AWSCredentials awsCredentials = new AWSCredentials(awsAccessKeyId, awsSecretAccessKey);      
-      RestS3Service s3Service = new RestS3Service(awsCredentials);
-      s3Service.setRequesterPaysEnabled(true);      
-      return s3Service;
+    private AmazonS3Client newS3Client() {      
+      AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey));
+      s3Client.addRequestHandler(new AbstractRequestHandler() {
+        public void beforeRequest(Request<?> request) {
+          request.addHeader("x-amz-request-payer", "requester");
+        }
+      });      
+      return s3Client;
     }
     
     private void copy(InputStream inputStream, OutputStream outputStream, Reporter reporter) throws IOException {
