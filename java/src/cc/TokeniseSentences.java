@@ -45,6 +45,7 @@ public class TokeniseSentences extends Configured implements Tool {
     conf.set("mapred.output.compression.type", "BLOCK");
     conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
     
+    conf.setMaxMapTaskFailuresPercent(100);
     conf.setNumReduceTasks(0);
     
     conf.setInputFormat(SequenceFileInputFormat.class);
