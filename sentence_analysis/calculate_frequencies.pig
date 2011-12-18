@@ -12,11 +12,11 @@ url_freq = foreach urls_grouped {
  generate SIZE(urls) as freq;
 }
 freq_grouped = group url_freq by freq;
-freq_freq = foreach freq_grouped {
+num_sentences_freq = foreach freq_grouped {
  generate group as freq, SIZE(url_freq) as freq_freq;
 }
 -- number_of_sentences_for_url, freq_freq
-store freq_freq into 'url_freq_freqs.gz';
+store num_sentences_freq into 'num_sentences_freqs.gz';
 
 sentence_lengths = foreach data generate SIZE(STRSPLIT(sentence)) as len;
 sentence_lengths_grouped = group sentence_lengths by len;
