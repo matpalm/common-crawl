@@ -102,9 +102,10 @@ public class FilterTextHtml extends Configured implements Tool {
         
         // emit
         String url = headerColumns[COLUMNS.URL.ordinal()];
+        String dts = headerColumns[COLUMNS.DTS.ordinal()];
 //        String tld = topLevelDomain(url);
 //        String dts = headerColumns[COLUMNS.DTS.ordinal()];
-        collector.collect(new Text(url), new Text(decodedHttpResponse));
+        collector.collect(new Text(url+"\t"+dts), new Text(decodedHttpResponse));
         
       }      
       catch(Exception e) {        
