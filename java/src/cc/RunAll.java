@@ -10,13 +10,12 @@ import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.SequenceFileOutputFormat;
 import org.apache.hadoop.mapred.lib.ChainMapper;
+import org.apache.hadoop.mapred.SequenceFileInputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.apache.nutch.tools.arc.ArcInputFormat;
 
 import cc.ExtractVisibleText.ExtractVisibleTextMapper;
 import cc.FilterEnglish.FilterEnglishMapper;
-import cc.FilterTextHtml.FilterTextHtmlMapper;
 import cc.TokeniseSentences.TokeniseSentencesMapper;
 
 public class RunAll extends Configured implements Tool {
@@ -32,45 +31,43 @@ public class RunAll extends Configured implements Tool {
     }
     
     JobConf conf = new JobConf(getConf(), getClass());
-    conf.setJobName(getClass().getName());
     
     conf.setOutputKeyClass(Text.class);
     conf.setOutputValueClass(Text.class);
     conf.set("mapred.output.compress", "true");
     conf.set("mapred.output.compression.type", "BLOCK");
-    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.GzipCodec");
+    conf.set("mapred.output.compression.codec", "org.apache.hadoop.io.compress.SnappyCodec");
 
     conf.setMaxMapTaskFailuresPercent(100);
-    
-    conf.setInputFormat(ArcInputFormat.class);
-
+   
+    String jobName = getClass().getName() + " ";
     for(int i=0; i<args.length; i++) {
-      if (i!=args.length-1)
+      if (i!=args.length-1) {
         FileInputFormat.addInputPath(conf, new Path(args[i]));
+        jobName += args[i] + " ";
+      }
       else
         FileOutputFormat.setOutputPath(conf, new Path(args[i]));
     }
+    conf.setJobName(jobName);
+    conf.setInputFormat(SequenceFileInputFormat.class);
     conf.setOutputFormat(SequenceFileOutputFormat.class);
     
-    JobConf mapAConf = new JobConf(false);
-    ChainMapper.addMapper(conf, FilterTextHtmlMapper.class, 
-        Text.class, BytesWritable.class,
-        Text.class, Text.class, true, mapAConf);
+//    ChainMapper.addMapper(conf, FilterTextHtmlMapper.class, 
+//        Text.class, BytesWritable.class,
+//        Text.class, Text.class, true, new JobConf(false));
 
-    JobConf mapBConf = new JobConf(false);
     ChainMapper.addMapper(conf, ExtractVisibleTextMapper.class, 
         Text.class, Text.class,
-        Text.class, Text.class, true, mapBConf);
+        Text.class, Text.class, true, new JobConf(false));
     
-    JobConf mapCConf = new JobConf(false);
     ChainMapper.addMapper(conf, FilterEnglishMapper.class, 
         Text.class, Text.class,
-        Text.class, Text.class, true, mapCConf);
+        Text.class, Text.class, true, new JobConf(false));
     
-    JobConf mapDConf = new JobConf(false);
     ChainMapper.addMapper(conf, TokeniseSentencesMapper.class, 
         Text.class, Text.class,
-        Text.class, Text.class, true, mapDConf);
+        Text.class, Text.class, true, new JobConf(false));
         
     JobClient.runJob(conf);
 
