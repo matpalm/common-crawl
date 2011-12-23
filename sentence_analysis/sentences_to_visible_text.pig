@@ -4,9 +4,9 @@ set default_parallel 800;
 register cc.jar
 define StrJoin cc.udfs.StrJoin;
 data = load '$INPUT' as (url:chararray, dts:long, pidx:int, sidx:int, sentence:chararray);
-by_url_dts = group data by (url,dts);
+by_url_dts = group data by (url, dts);
 combined_text = foreach by_url_dts {
  sorted = order data by pidx, sidx;
- generate flatten(group), StrJoin(data.sentence) as sentences;
+ generate CONCAT(group.url, group.dts), StrJoin(sorted.sentence) as sentences;
 }
 store combined_text into '$OUTPUT';
