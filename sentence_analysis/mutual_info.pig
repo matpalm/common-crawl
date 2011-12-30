@@ -18,8 +18,7 @@ unigram_f = foreach u_grped generate group as t1, SIZE(unigrams) as freq;
 u_grped_all = group unigram_f all;
 unigram_c = foreach u_grped_all generate SUM(unigram_f.freq) as count;
 b_grped = group bigrams by ($0,$1);
-bigram_f = foreach b_grped generate flatten(group), SIZE(bigrams) as freq;
-bigram_f = foreach bigram_f generate $0 as t1, $1 as t2, freq;
+bigram_f = foreach b_grped generate flatten(group) as (t1, t2), SIZE(bigrams) as freq;
 b_grped_all = group bigram_f all;
 bigram_c = foreach b_grped_all generate SUM(bigram_f.freq) as count;
 
