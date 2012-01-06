@@ -1,0 +1,18 @@
+sentence_length_freq.tsv
+sentence_length freq
+3       7357913974
+4       5287352374
+5       6074314614
+6       5762375706
+...
+
+
+per_numtokens_sample.bz2
+a sample of 1000 sentences for each sentence length
+(taken in turn from a random 0.1% sample of total)
+
+sample_0.00001.gz
+0.001% sample of original => 800,000 records
+
+
+

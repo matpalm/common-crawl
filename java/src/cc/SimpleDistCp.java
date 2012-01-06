@@ -33,7 +33,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.handlers.AbstractRequestHandler;
 import com.amazonaws.services.s3.AmazonS3Client;
 
-public class SimpleDistCp  extends Configured implements Tool {
+public class SimpleDistCp extends Configured implements Tool {
   
   private static final String CC_HDFS_PATH = "cc.hdfs_path";
   private static final int MAX_RETRIES = 10;
