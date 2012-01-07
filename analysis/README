@@ -6,6 +6,15 @@ sentence_length freq
 6       5762375706
 ...
 
+num_sentences_freqs.tsv
+number of sentences per paragraph in sentence.seq
+#sentences freq
+1       9959344
+2       11524626
+3       14514418
+4       13861049
+...
+
 
 per_numtokens_sample.bz2
 a sample of 1000 sentences for each sentence length

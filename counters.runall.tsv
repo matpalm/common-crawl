@@ -1,0 +1,55 @@
+ExtractVisibleText.exception	stack_overflow (neko?)	90412
+ExtractVisibleText.exception	BoilerpipeProcessingException	526
+ExtractVisibleText.exception	ArrayIndexOutOfBoundsException	279
+ExtractVisibleText	has_visible_text	2528885189
+ExtractVisibleText	no_content	73083872
+ExtractVisibleText	no_spaces_in_text	7168589
+File Input Format Counters 	Bytes Read	29503316153542
+FileSystemCounters	HDFS_BYTES_READ	29515157644663
+FileSystemCounters	FILE_BYTES_WRITTEN	8599756945278
+FileSystemCounters	FILE_BYTES_READ	1899144001910
+FilterEnglish.language	en	1430922983
+FilterEnglish.language	lt	242197471
+FilterEnglish.language	no	129601442
+FilterEnglish.language	fr	126178984
+FilterEnglish.language	et	123568611
+FilterEnglish.language	it	107386312
+FilterEnglish.language	ro	70266259
+FilterEnglish.language	de	57160335
+FilterEnglish.language	gl	54248616
+FilterEnglish.language	es	50938864
+FilterEnglish.language	sk	23550285
+FilterEnglish.language	pt	21661480
+FilterEnglish.language	pl	18546908
+FilterEnglish.language	ru	15447317
+FilterEnglish.language	nl	14160630
+FilterEnglish.language	hu	7696704
+FilterEnglish.language	sl	6936442
+FilterEnglish.language	ca	6147800
+FilterEnglish.language	fi	5953360
+FilterEnglish.language	sv	5736967
+FilterEnglish.language	uk	2801397
+FilterEnglish.language	is	2758223
+FilterEnglish.language	th	1379561
+FilterEnglish.language	da	1301635
+FilterEnglish.language	el	1274404
+FilterEnglish.language	eo	871355
+FilterEnglish.language	be	171427
+FilterEnglish.language	unknown	19417
+Map-Reduce Framework	Combine input records	0
+Map-Reduce Framework	Combine output records	0
+Map-Reduce Framework	CPU time spent (ms)	35969058630
+Map-Reduce Framework	Map input bytes	29497310930484
+Map-Reduce Framework	Map input records	2609228867
+Map-Reduce Framework	Map output bytes	13045305937149
+Map-Reduce Framework	Map output materialized bytes	7485386064334
+Map-Reduce Framework	Map output records	81052135861
+Map-Reduce Framework	Physical memory (bytes) snapshot	519160815640576
+Map-Reduce Framework	Spilled Records	94009787793
+Map-Reduce Framework	SPLIT_RAW_BYTES	42693273
+Map-Reduce Framework	Total committed heap usage (bytes)	438429368909824
+Map-Reduce Framework	Virtual memory (bytes) snapshot	940339160883200
+TokeniseSentences	num_sentences_emitted	81052135861
+TokeniseSentences	num_sentences_too_short	26174610871
+TokeniseSentences	duplicate_sentences	6084476307
+TokeniseSentences	num_input_records	1430922983
