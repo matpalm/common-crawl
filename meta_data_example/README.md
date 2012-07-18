@@ -1,18 +1,8 @@
-common crawl recently released some preprocessed versions of their 2012 crawl data. a great overview of the dataset is available
-on theif <a href="https://commoncrawl.atlassian.net/wiki/display/CRWL/About+the+Data+Set">wiki</a>
+common crawl recently released some preprocessed versions of their 2012 crawl data. see their <a href="https://commoncrawl.atlassian.net/wiki/display/CRWL/About+the+Data+Set">wiki</a> for a great overview of the dataset
 
 let's review one part of it, the link data...
 
-first we need to check the manifests
-
-    $ s3cmd ls s3://aws-publicdatasets/common-crawl/parse-output/valid_segments/
-      DIR   s3://aws-publicdatasets/common-crawl/parse-output/valid_segments/1341690147253/
-      DIR   s3://aws-publicdatasets/common-crawl/parse-output/valid_segments/1341690148298/
-      DIR   s3://aws-publicdatasets/common-crawl/parse-output/valid_segments/1341690149519/
-      ....
-
-reviewing just one, say the first, we can check the data available, there's three types, the arc files with the actual crawl data as well as some
-parsed text files and some meta data. for now let's just check the meta data...
+first we need to know where to find the data. as described in the wiki the data is chunked into segments with all sorts of preprocessed data available. for this quick hack all i want is the meta data...
 
     $ s3cmd ls s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/ | grep metadata
       2012-07-08 00:53  41937063   s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000
@@ -22,9 +12,11 @@ parsed text files and some meta data. for now let's just check the meta data...
       2012-07-08 01:32   5717068   s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-04379
       2012-07-08 01:32   5608750   s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-04380
 
-so for this segment there are 4381 files totalling about 170gb. 
+so for this segment there are 4381 meta data files totalling about 170gb. 
 
-since these files are hadoop sequence files, the easiest way to have a review them is using `hadoop fs -text`. eg, from an elastic mapreduce cluster
+since these files are hadoop sequence files, the easiest way to have a review them is using `hadoop fs -text`. 
+
+eg, from an elastic mapreduce cluster
 
     $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null | head -n1
       http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/   {"attempt_time":1328767770376,"disposition":"SUCCESS","server_ip":"77.229.63.16","http_result":200,"http_headers":{"response":"HTTP/1.1 200 OK","server":"Zope/(Zope 2.9.6-final, python 2.4.4...
@@ -35,7 +27,7 @@ meta data pretty simply...
     $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null \
      | head -n1 | cut -f2 | python -mjson.tool > meta_data_example.json
 
-this meta data file is included in this repo, you can see it above.
+the <a href="https://github.com/matpalm/common-crawl/blob/master/meta_data_example/meta_data_example.json">meta_data_example.json</a> file is availble in this repo.
 
 or particular interest is the link section...
 
@@ -61,35 +53,36 @@ or particular interest is the link section...
 
 so if we want to do link analysis we just need to extract these.. 
 
-first we prototype a python script for doing it
+first we prototype a python script for doing it but getting an example row from a metadata file ...
 
     $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null
      | head -n1 > meta_data_single_row.tsv
 
-then we feed this through a links extraction script which in this simple case just emits two column, the source top level domain and the top level domain of
-each other link that's not the same. for our simple example it's just the one link...
+... then feeding it through a links extraction script which, in this simple case, just emits two columns; the source top level domain and the top level domain of each other link that's not the same. 
+
+for our simple example it's just the one link...
 
     $ ./links_extractor.py < meta_data_single_row.tsv 
     www.museo-cb.com       contadores.miarroba.com
 
 if we try a slightly larger dataset...
 
-   $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null | head -n100 | gzip > meta_data.100.tsv.gz
-   $ zcat meta_data.100.tsv.gz | ./links_extractor.py | sort | uniq -c | sort -nr | head
-    326 www.softmix.org	       softmix.org
-     48 store.shopping.yahoo.co.jp	i.yimg.jp
-     41 www.thenoiseacademy.com		thenoiseacademy.com
-     31 www.softmix.org			depositfiles.com
-     26 store.shopping.yahoo.co.jp	shopping.c.yimg.jp
-     25 www.nissanvillage.com		server8.crucialnetworking.com
-     25 www.maadvisor.com		api.ning.com
-     22 www.sms.at			i.sms.at
-     21 real-estate-atlanta.toddwalters.com	www.toddwalters.com
-     15 www.wumpus-gollum-forum.de		www.oldradioworld.de
+    $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null | head -n100 | gzip > meta_data.100.tsv.gz
+    $ zcat meta_data.100.tsv.gz | ./links_extractor.py | sort | uniq -c | sort -nr | head
+     326 www.softmix.org	       softmix.org
+      48 store.shopping.yahoo.co.jp	i.yimg.jp
+      41 www.thenoiseacademy.com		thenoiseacademy.com
+      31 www.softmix.org			depositfiles.com
+      26 store.shopping.yahoo.co.jp	shopping.c.yimg.jp
+      25 www.nissanvillage.com		server8.crucialnetworking.com
+      25 www.maadvisor.com		api.ning.com
+      22 www.sms.at			i.sms.at
+      21 real-estate-atlanta.toddwalters.com	www.toddwalters.com
+      15 www.wumpus-gollum-forum.de		www.oldradioworld.de
 
 so my naive top level domain extraction was as naive as i expected (ie very) but you get the idea...
 
-now that we have a working script we run it via hadoop streaming against a large dataset, say the first metadata file...
+now that we have a working script we run it via hadoop streaming against a large dataset. let's just do the first metadata file.
 
     $ hadoop jar ./.versions/0.20.205/share/hadoop/contrib/streaming/hadoop-streaming.jar \
      -input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 \
@@ -98,7 +91,7 @@ now that we have a working script we run it via hadoop streaming against a large
      -mapper 'python links_extractor.py' \
      -file links_extractor.py
 
-which, one a 3x node m1.small cluster after 7 minutes, gives us some link data to play with...
+which on a 3 node m1.small cluster takes 7 minutes. we've then got some link data to play with...
 
     $ hadoop fs -ls metadata-00000.links.gz
      Found 6 items
@@ -116,7 +109,7 @@ which, one a 3x node m1.small cluster after 7 minutes, gives us some link data t
      2012theawakening.net    wordpress.org
      2012theawakening.net    laptopinsurancei.co.uk
 
-to get a set of frequencies like how we used `sort | uniq -c | sort -nr` above is a trivial pig script...
+to get a set of frequencies (like how we used `sort | uniq -c | sort -nr`) above is a trivial pig script...
 
     $ pig 
      set default_parallel 3;
