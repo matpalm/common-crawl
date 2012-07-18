@@ -2,7 +2,7 @@ common crawl recently released some preprocessed versions of their 2012 crawl da
 
 let's review one part of it, the link data...
 
-first we need to know where to find the data. as described in the wiki the data is chunked into segments with all sorts of preprocessed data available. for this quick hack all i want is the meta data...
+first we need to know where to find it. as described in the wiki it's chunked into segments with all sorts of preprocessed data available. for this quick hack all i want is the meta data...
 
     $ s3cmd ls s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/ | grep metadata
       2012-07-08 00:53  41937063   s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000
@@ -89,7 +89,7 @@ now that we have a working script we run it via hadoop streaming against an even
      -mapper 'python links_extractor.py' \
      -file links_extractor.py
 
-changing the input to `-input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-*` would do the entire 170gb of the first segment (if you've got a bit enough cluster)
+changing the input to `-input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-*` would do the entire 170gb of the first segment (if you've got a big enough cluster)
 
 we've then got some link data to play with...
 
