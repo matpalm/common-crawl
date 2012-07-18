@@ -1,0 +1,1309 @@
+{
+    "archiveInfo": {
+        "arcFileDate": 1341708194671, 
+        "arcFileOffset": 156, 
+        "arcFileParition": 0, 
+        "arcSourceSegmentId": 1341690147253, 
+        "compressedSize": 9775
+    }, 
+    "attempt_time": 1328767770376, 
+    "charset_detected": "UTF-8", 
+    "charset_detector": 0, 
+    "content": {
+        "links": [
+            {
+                "href": "http://www.museo-cb.com/portal_javascripts/Plone%20Default/ploneScripts5575.js", 
+                "text": "", 
+                "type": "text/javascript"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/portal_css/Plone%20Default/ploneStyles8116.css", 
+                "media": "screen", 
+                "rel": "alternate stylesheet", 
+                "text": "", 
+                "title": "Small Text", 
+                "type": "text/css"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/portal_css/Plone%20Default/ploneStyles7006.css", 
+                "media": "screen", 
+                "rel": "alternate stylesheet", 
+                "text": "", 
+                "title": "Large Text", 
+                "type": "text/css"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/favicon.ico", 
+                "rel": "shortcut icon", 
+                "text": "", 
+                "type": "image/x-icon"
+            }, 
+            {
+                "href": "http://www.museo-cb.com", 
+                "rel": "home", 
+                "text": "", 
+                "title": "P\ufffdgina de portada", 
+                "type": "link"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/search_form", 
+                "rel": "search", 
+                "text": "", 
+                "title": "Busque en este sitio", 
+                "type": "link"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/author/admin", 
+                "rel": "author", 
+                "text": "", 
+                "title": "Informaci\ufffdn sobre el autor", 
+                "type": "link"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/sitemap", 
+                "rel": "contents", 
+                "text": "", 
+                "title": "Mapa del Sitio", 
+                "type": "link"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video", 
+                "rel": "up", 
+                "text": "", 
+                "title": "Up one level", 
+                "type": "link"
+            }, 
+            {
+                "accesskey": "2", 
+                "class": "hiddenStructure", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/#documentContent", 
+                "text": "Cambiar a contenido.", 
+                "type": "a"
+            }, 
+            {
+                "accesskey": "6", 
+                "class": "hiddenStructure", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/#portlet-navigation-tree", 
+                "text": "Saltar a navegaci\u00f3n", 
+                "type": "a"
+            }, 
+            {
+                "accesskey": "3", 
+                "href": "http://www.museo-cb.com/sitemap", 
+                "text": "Mapa del Sitio", 
+                "title": "Mapa del Sitio", 
+                "type": "a"
+            }, 
+            {
+                "accesskey": "0", 
+                "href": "http://www.museo-cb.com/accessibility-info", 
+                "text": "accesibilidad", 
+                "title": "accesibilidad", 
+                "type": "a"
+            }, 
+            {
+                "accesskey": "9", 
+                "href": "http://www.museo-cb.com/contact-info", 
+                "text": "Contacto", 
+                "title": "Contacto", 
+                "type": "a"
+            }, 
+            {
+                "accesskey": "5", 
+                "href": "http://www.museo-cb.com/search_form", 
+                "text": "B\u00fasqueda Avanzada...", 
+                "type": "a"
+            }, 
+            {
+                "accesskey": "1", 
+                "href": "http://www.museo-cb.com", 
+                "text": "MuseoCB", 
+                "type": "a"
+            }, 
+            {
+                "href": "http://www.museo-cb.com", 
+                "text": "Inicio", 
+                "type": "a"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb", 
+                "text": "Museo CB", 
+                "type": "a"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video", 
+                "text": "Audio y video", 
+                "type": "a"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/sitemap", 
+                "text": "Navegaci\u00f3n", 
+                "type": "a"
+            }, 
+            {
+                "class": " visualIconPadding", 
+                "href": "http://www.museo-cb.com", 
+                "text": "Inicio", 
+                "title": "Museo Radioaficionado", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb", 
+                "text": "Museo CB", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-moviles", 
+                "text": "Emisoras m\u00f3viles", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-bases", 
+                "text": "Emisoras bases", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-walkis", 
+                "text": "Emisoras walkis", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-portatiles", 
+                "text": "Emisoras port\u00e1tiles", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-solo-para-coche", 
+                "text": "Emisoras solo para coche", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-con-telefono", 
+                "text": "Emisoras con telefono", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-sos", 
+                "text": "Emisoras SOS", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/emisoras-de-juguete", 
+                "text": "Emisoras miliw\u00e1ticas", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/receptores", 
+                "text": "Receptores", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/tx2019s-otras-frecuencias", 
+                "text": "TX\u2019s otras frecuencias", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/microfonos-de-base", 
+                "text": "Micr\u00f3fonos de base", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/alimentadores", 
+                "text": "Alimentadores", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/microfonos-de-mano-amplificados", 
+                "text": "Micr\u00f3fonos de mano amplificados", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/microfonos-de-mano-dinamicos", 
+                "text": "Micr\u00f3fonos de mano  din\u00e1micos", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/medidores-roe", 
+                "text": "Medidores y acopladores ROE", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/antenas-filtros-y-rotores", 
+                "text": "Antenas y rotores", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/llamadas-selectivas", 
+                "text": "Llamadas selectivas", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/aparatos-de-medida", 
+                "text": "Aparatos de medida", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/s-meters", 
+                "text": "S-meters", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/conmutadores", 
+                "text": "Conmutadores de antena", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/filtros-y-cargas", 
+                "text": "Filtros y cargas", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/receptores-comerciales", 
+                "text": "Receptores comerciales", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/juegos-y-juguetes", 
+                "text": "Juegos y juguetes", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/curiosidades", 
+                "text": "Curiosidades", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video", 
+                "text": "Audio y video", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/amplificadores-rx", 
+                "text": "Amplificadores RX", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/amplificadores-tx", 
+                "text": "Amplificadores TX", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/otros-accesorios", 
+                "text": "Otros accesorios", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/altavoces", 
+                "text": "Altavoces", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/libros", 
+                "text": "Libros", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/revistas-y-catalogos", 
+                "text": "Revistas y Cat\u00e1logos", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/exposiciones", 
+                "text": "Exposiciones y Actividades", 
+                "title": "Aqu\u00ed tienen una lista de las exposiciones y actividades que se han realizado desde que se inaugur\u00f3 esta web con fotos de cada uno de los sitios en los que hemos estado ense\u00f1ando nuestro material u organizando actividades.", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/donaciones", 
+                "text": "Donaciones", 
+                "title": "Agradecimientos", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/mercadillo", 
+                "text": "Mercadillo", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/publicidad_equipos", 
+                "text": "Publicidad antigua", 
+                "title": "Antigua publicidad de equipos, antenas y accesorios de CB.\r\nLa mayor\u00eda de las im\u00e1genes han sido recopiladas en la web (ver marca de agua de las p\u00e1ginas), o escaneadas por museo-cb.", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/arl-100", 
+                "text": "ARL 100-99 y 98", 
+                "title": "Nuestros inicios", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/Esquemas", 
+                "text": "Esquemas y Manuales", 
+                "title": "Algunos de los esquemas han sido descargados de algunas p\u00e1ginas web (ver referencia en los esquemas). Otros son propiedad de Museo CB, que los pone a disposici\u00f3n de todos los usuarios.\r\nLos esquemas de Carkit, Saleskit, y Cebek han sido donados por Francisco Velasco, EB4DFG, 30MCB239.", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/el-arl-cb", 
+                "text": "El ARL CB", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/link-recomendados", 
+                "text": "Enlaces Recomendados", 
+                "title": "Links", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb-en-los-medios-prensa", 
+                "text": "Museo CB en los medios (Prensa)", 
+                "title": "Apariciones de Museo Cb en los medios de comunicaci\u00f3n.", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/libro-de-firmas", 
+                "text": "Libro de firmas", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/asociate", 
+                "text": "Asociate", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/proximos-eventos/", 
+                "text": "Proximos Eventos", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/resultado-liga-cacerias-campo-de-gibraltar", 
+                "text": "Resultado Liga Cacer\u00edas Campo de Gibraltar 30/11/2009  ", 
+                "title": "a", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/proximos-eventos/cena-de-navidad-de-museo-cb", 
+                "text": "Cena de Navidad de Museo CB 17/11/2009  ", 
+                "title": "Por tercer a\u00f1o consecutivo, la Asociaci\u00f3n Pro Museo CB organiza una Cena de Navidad para socios y amigos de la radio.\r\nSer\u00e1 el pr\u00f3ximo s\u00e1bado 19 de diciembre en la Posada de Mill\u00e1n, en Campamento (San Roque-C\u00e1diz), muy cerca de la calle Radioaficionado.", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/proximos-eventos/codigo-q-programa-de-radio", 
+                "text": "C\u00f3digo Q, programa de radio 15/10/2009  ", 
+                "title": "Programa de radio semanal de Canal San Roque Rdaio, dedicado al mundo de la Banda Ciudadana y Radioafici\u00f3n. Puedes descargarlo o escucharlo en www.cb27.com/codigoq", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/proximos-eventos/iniciativa-para-que-una-calle-de-todos-los-municipios-de-espana-se-llame-201cradioaficionado-cb201d", 
+                "text": "Iniciativa para que una calle de todos los municipios de Espa\u00f1a se llame \u201cRadioaficionado CB\u201d 31/12/2007  ", 
+                "title": "El colectivo Museo CB y CB27.com, en colaboraci\u00f3n con asociaciones, colectivos, radioaficionados y cebe\u00edstas particulares de toda Espa\u00f1a va a solicitar en todos los ayuntamientos de Espa\u00f1a que una calle sea denominada en 2008 como de \u201cCebe\u00edstas\u201d, \u201cRadioaficionados CB\u201d o \u201cBanda Ciudadana\u201d, como homenaje y reconocimiento a los miles de personas que en alguna ocasi\u00f3n han utilizado o se han visto beneficiados por la comunicaci\u00f3n por radio en esta Banda Ciudadana.", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/proximos-eventos/radioenlace-eqso-en-el-campo-de-gibraltar", 
+                "text": "Radioenlace Eqso en el Campo de Gibraltar 26/07/2007  ", 
+                "title": "En marcha de nuevo el radioenlace de eqso  en el Campo de Gibraltar y Ceuta. Canal 15 AM.", 
+                "type": "a"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/proximos-eventos/", 
+                "text": "Proximos eventos", 
+                "type": "a"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/news_listing", 
+                "text": "\u00daltimas noticias", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/comunicado-de-museo-cb-ante-la-nueva-norma-de-banda-ciudadana", 
+                "text": "Comunicado de Museo CB ante la nueva Norma de Banda Ciudadana 29/03/2010  ", 
+                "title": "Satisfacci\u00f3n moderada por los avances para los cebe\u00edstas\r\n\r\n\r\nDesde Museo CB queremos mostrar nuestra moderada satisfacci\u00f3n ante la nueva normativa que regir\u00e1 a la Cb, ya que si bien no se ha conseguido el objetivo final, el que la CB sea de uso libre aunque regulada, se han logrado avances muy significativos para la pr\u00e1ctica de la Cb en nuestro pa\u00eds.\r\n\r\nHay que se\u00f1alar que la mayor\u00eda de las modificaciones en la norma son fruto de la petici\u00f3n conjunta realizada a la Administraci\u00f3n por los colectivos de Banda Ciudadana: Federaci\u00f2 Catalana de CB, Liga Espa\u00f1ola de C.B., Federaci\u00f3n Espa\u00f1ola C.B. y Plataforma por el uso libre de la C.B., consensuadas tras el Congreso Aniversario de la CB, organizado por Museo CB en septiembre de 2008.\r\n\r\nDe ese congreso sali\u00f3 un documento que se hizo p\u00fablico en diciembre de 2008 y que fue entregado a la administraci\u00f3n en febrero de 2009, en el que se recog\u00edan las principales peticiones del colectivo de CB.\r\n\r\nA continuaci\u00f3n se reproduce el documento entregado en febrero de 2009 a la administraci\u00f3n por Antonio Manuel Adalia Fern\u00e1ndez, Presidente de la Liga Espa\u00f1ola de Asociaciones de CB y Radioaficionados, y Jos\u00e9 Mar\u00eda Yag\u00fce Moreno, presidente de la Asociaci\u00f3n Pro Museo CB y portavoz de la Plataforma para el Uso Libre de la CB en Espa\u00f1a, marc\u00e1ndose en cursiva (*) lo que no se ha concedido por la administraci\u00f3n.", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/publicada-la-nueva-normativa-para-cb", 
+                "text": "Publicada la nueva normativa para CB 28/03/2010  ", 
+                "title": "El Bolet\u00edn Oficial del Estado public\u00f3 ayer, s\u00e1bado 27 de marzo de 2010, la modificaci\u00f3n del Reglamento de uso del dominio p\u00fablico radioel\u00e9ctrico de la Banda Ciudadana CB-27. En dicha modificaci\u00f3n, que entra en vigor hoy, se recogen ciertos aspectos fundamentales para el uso de la CB:", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/caceria-del-zorro-de-museo-cb-en-la-linea", 
+                "text": "Cacer\u00eda del Zorro de Museo CB en La L\u00ednea 30/11/2009  ", 
+                "title": "Foto de la Cacer\u00eda del Zorro de Museo CB celebrada en La L\u00ednea el 28 de noviembre de 2009", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/canal-san-roque-radio-estrena-el-7-de-octubre-un-programa-sobre-la-banda-ciudadana", 
+                "text": "Canal San Roque Radio estrena el 7 de octubre un programa sobre la Banda Ciudadana 02/10/2009  ", 
+                "title": "Canal San Roque Radio pone en marcha, dentro de su nueva programaci\u00f3n para el oto\u00f1o-invierno, un programa semanal dedicado a la Banda Ciudadana y la radioafici\u00f3n, denominado \u201cC\u00f3digo Q\u201d.\r\nEste estreno de producci\u00f3n propia es el \u00fanico programa de radio en Espa\u00f1a dedicado a la Cb, que se completar\u00e1 con noticias de radioaficionados.\r\nEl programa se colgar\u00e1 en internet en la direcci\u00f3n www.cb27.com/codigoq , gracias a la colaboraci\u00f3n de la Asociaci\u00f3n CB Sierra de C\u00e1diz, donde podr\u00e1 ser escuchado o descargado.", 
+                "type": "a"
+            }, 
+            {
+                "alt": "", 
+                "height": "16", 
+                "href": "http://www.museo-cb.com/newsitem_icon.gif", 
+                "text": "", 
+                "title": "News", 
+                "type": "img", 
+                "width": "16"
+            }, 
+            {
+                "class": "tile", 
+                "href": "http://www.museo-cb.com/donaciones/datos-estadisticos-de-donaciones-a-museo-cb", 
+                "text": "Datos estad\u00edsticos de donaciones a Museo CB: 21/09/2009  ", 
+                "title": "De los 2133 art\u00edculos expuestos en la p\u00e1gina de Museo CB (actualizado agosto de 2009), 255 han sido donados por 122 colegas. Ello supone, que de los fondos de Museo CB, un 11,95 % son donados.", 
+                "type": "a"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/news_listing", 
+                "text": "M\u00e1s noticias...", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Send this page to somebody", 
+                "href": "http://www.museo-cb.com/mail_icon.gif", 
+                "id": "icon-sendto", 
+                "text": "", 
+                "title": "Enviar esta p\u00e1gina a alguien", 
+                "type": "img"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/sendto_form", 
+                "text": "", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Print this page", 
+                "href": "http://www.museo-cb.com/print_icon.gif", 
+                "id": "icon-print", 
+                "text": "", 
+                "title": "Imprimir esta p\u00e1gina", 
+                "type": "img"
+            }, 
+            {
+                "alt": "Frequency VHS", 
+                "class": "newsImage", 
+                "height": "200", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/image_mini", 
+                "text": "", 
+                "title": "Frequency VHS", 
+                "type": "img", 
+                "width": "120"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/image/image_view_fullscreen", 
+                "text": "", 
+                "type": "a"
+            }, 
+            {
+                "class": " state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-cartel", 
+                "text": "Frequency cartel", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": " state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-calendario", 
+                "text": "Frequency Calendario", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "class": " state-published visualIconPadding", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-dvd", 
+                "text": "Frequency DVD", 
+                "title": "", 
+                "type": "a"
+            }, 
+            {
+                "alt": "24 Great Truck Drivin\u00b4Songs", 
+                "class": "imagen_galeria", 
+                "height": "65", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/24-great-truck-drivinsongs/image_thumb", 
+                "text": "", 
+                "title": "24 Great Truck Drivin\u00b4Songs", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/24-great-truck-drivinsongs/", 
+                "target": "_self", 
+                "text": "24 Great Truck Drivin\u00b4Songs  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Afiche Si Tous Les gars du monde", 
+                "class": "imagen_galeria", 
+                "height": "109", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/afiche-si-tous-les-gards-du-monde/image_thumb", 
+                "text": "", 
+                "title": "Afiche Si Tous Les gars du monde", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/afiche-si-tous-les-gards-du-monde/", 
+                "target": "_self", 
+                "text": "Afiche Si Tous Les gars du monde  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "All Ears 8 Track", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/all-ears-8-track/image_thumb", 
+                "text": "", 
+                "title": "All Ears 8 Track", 
+                "type": "img", 
+                "width": "102"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/all-ears-8-track/", 
+                "target": "_self", 
+                "text": "All Ears 8 Track  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "All Ears LP", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/all-ears-lp/image_thumb", 
+                "text": "", 
+                "title": "All Ears LP", 
+                "type": "img", 
+                "width": "101"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/all-ears-lp/", 
+                "target": "_self", 
+                "text": "All Ears LP  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Breaker Breaker DVD", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/breaker-breaker-dvd/image_thumb", 
+                "text": "", 
+                "title": "Breaker Breaker DVD", 
+                "type": "img", 
+                "width": "119"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/breaker-breaker-dvd/", 
+                "target": "_self", 
+                "text": "Breaker Breaker DVD  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Breaker Breaker VHS", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/breaker-breaker-vhs/image_thumb", 
+                "text": "", 
+                "title": "Breaker Breaker VHS", 
+                "type": "img", 
+                "width": "63"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/breaker-breaker-vhs/", 
+                "target": "_self", 
+                "text": "Breaker Breaker VHS  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "CB Hustlers VHS", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cb-hustlers-vhs/image_thumb", 
+                "text": "", 
+                "title": "CB Hustlers VHS", 
+                "type": "img", 
+                "width": "112"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cb-hustlers-vhs/", 
+                "target": "_self", 
+                "text": "CB Hustlers VHS  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "CB Special 8 Track", 
+                "class": "imagen_galeria", 
+                "height": "82", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cb-special-8-track/image_thumb", 
+                "text": "", 
+                "title": "CB Special 8 Track", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cb-special-8-track/", 
+                "target": "_self", 
+                "text": "CB Special 8 Track  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "CB Tips", 
+                "class": "imagen_galeria", 
+                "height": "103", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cb-tips/image_thumb", 
+                "text": "", 
+                "title": "CB Tips", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cb-tips/", 
+                "target": "_self", 
+                "text": "CB Tips  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Citizens Band VHS", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/citizens-band-vhs/image_thumb", 
+                "text": "", 
+                "title": "Citizens Band VHS", 
+                "type": "img", 
+                "width": "81"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/citizens-band-vhs/", 
+                "target": "_self", 
+                "text": "Citizens Band VHS  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Convoy cartel", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/convoy-cartel/image_thumb", 
+                "text": "", 
+                "title": "Convoy cartel", 
+                "type": "img", 
+                "width": "90"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/convoy-cartel/", 
+                "target": "_self", 
+                "text": "Convoy cartel  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Convoy (single) - CW McCall", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/convoy-single-cw-mccall/image_thumb", 
+                "text": "", 
+                "title": "Convoy (single) - CW McCall", 
+                "type": "img", 
+                "width": "112"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/convoy-single-cw-mccall/", 
+                "target": "_self", 
+                "text": "Convoy (single) - CW McCall  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Convoy VHS", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/convoy-vhs/image_thumb", 
+                "text": "", 
+                "title": "Convoy VHS", 
+                "type": "img", 
+                "width": "98"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/convoy-vhs/", 
+                "target": "_self", 
+                "text": "Convoy VHS  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Breaker Breaker DVD", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/copy_of_breaker-breaker-dvd/image_thumb", 
+                "text": "", 
+                "title": "Breaker Breaker DVD", 
+                "type": "img", 
+                "width": "92"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/copy_of_breaker-breaker-dvd/", 
+                "target": "_self", 
+                "text": "Breaker Breaker DVD  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "CW McCall", 
+                "class": "imagen_galeria", 
+                "height": "107", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cw-mccall/image_thumb", 
+                "text": "", 
+                "title": "CW McCall", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cw-mccall/", 
+                "target": "_self", 
+                "text": "CW McCall  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "CW McCall", 
+                "class": "imagen_galeria", 
+                "height": "63", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cw-mccall-1/image_thumb", 
+                "text": "", 
+                "title": "CW McCall", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/cw-mccall-1/", 
+                "target": "_self", 
+                "text": "CW McCall  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Everithing you need to know to operate a CB Radio LP", 
+                "class": "imagen_galeria", 
+                "height": "78", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/everithing-you-need-to-know-to-operate-a-cb-radio-lp/image_thumb", 
+                "text": "", 
+                "title": "Everithing you need to know to operate a CB Radio LP", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/everithing-you-need-to-know-to-operate-a-cb-radio-lp/", 
+                "target": "_self", 
+                "text": "Everithing you need to know to operate a CB Radio LP  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Frequency Calendario", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-calendario/image_thumb", 
+                "text": "", 
+                "title": "Frequency Calendario", 
+                "type": "img", 
+                "width": "93"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-calendario/", 
+                "target": "_self", 
+                "text": "Frequency Calendario  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Frequency cartel", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-cartel/image_thumb", 
+                "text": "", 
+                "title": "Frequency cartel", 
+                "type": "img", 
+                "width": "94"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-cartel/", 
+                "target": "_self", 
+                "text": "Frequency cartel  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Frequency DVD", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-dvd/image_thumb", 
+                "text": "", 
+                "title": "Frequency DVD", 
+                "type": "img", 
+                "width": "90"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-dvd/", 
+                "target": "_self", 
+                "text": "Frequency DVD  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Frequency VHS", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/image_thumb", 
+                "text": "", 
+                "title": "Frequency VHS", 
+                "type": "img", 
+                "width": "77"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/", 
+                "target": "_self", 
+                "text": "Frequency VHS  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Everithing you need to know to operate a CB Radio 8 track", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/how-to-cb-8-track/image_thumb", 
+                "text": "", 
+                "title": "Everithing you need to know to operate a CB Radio 8 track", 
+                "type": "img", 
+                "width": "109"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/how-to-cb-8-track/", 
+                "target": "_self", 
+                "text": "Everithing you need to know to operate a CB Radio 8 track  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "How to CB LP", 
+                "class": "imagen_galeria", 
+                "height": "62", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/how-to-cb-lp/image_thumb", 
+                "text": "", 
+                "title": "How to CB LP", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/how-to-cb-lp/", 
+                "target": "_self", 
+                "text": "How to CB LP  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Jerry Jordan LP", 
+                "class": "imagen_galeria", 
+                "height": "63", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/jerry-jordan-lp/image_thumb", 
+                "text": "", 
+                "title": "Jerry Jordan LP", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/jerry-jordan-lp/", 
+                "target": "_self", 
+                "text": "Jerry Jordan LP  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "La CB", 
+                "class": "imagen_galeria", 
+                "height": "120", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/la-cb/image_thumb", 
+                "text": "", 
+                "title": "La CB", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/la-cb/", 
+                "target": "_self", 
+                "text": "La CB  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Nuca juegues con extra\u00f1os DVD", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/nuca-juegues-con-extranos-dvd/image_thumb", 
+                "text": "", 
+                "title": "Nuca juegues con extra\u00f1os DVD", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/nuca-juegues-con-extranos-dvd/", 
+                "target": "_self", 
+                "text": "Nuca juegues con extra\u00f1os DVD  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Overload Diesel 8 Track", 
+                "class": "imagen_galeria", 
+                "height": "89", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/overload-diesel-8-track/image_thumb", 
+                "text": "", 
+                "title": "Overload Diesel 8 Track", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/overload-diesel-8-track/", 
+                "target": "_self", 
+                "text": "Overload Diesel 8 Track  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Pel\u00edculas CB", 
+                "class": "imagen_galeria", 
+                "height": "98", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/peliculas-cb/image_thumb", 
+                "text": "", 
+                "title": "Pel\u00edculas CB", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/peliculas-cb/", 
+                "target": "_self", 
+                "text": "Pel\u00edculas CB  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Road Music 8 Track", 
+                "class": "imagen_galeria", 
+                "height": "82", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/road-music-8-track/image_thumb", 
+                "text": "", 
+                "title": "Road Music 8 Track", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/road-music-8-track/", 
+                "target": "_self", 
+                "text": "Road Music 8 Track  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Si Tous Les gars du monde", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/si-tous-les-gards-du-monde/image_thumb", 
+                "text": "", 
+                "title": "Si Tous Les gars du monde", 
+                "type": "img", 
+                "width": "94"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/si-tous-les-gards-du-monde/", 
+                "target": "_self", 
+                "text": "Si Tous Les gars du monde  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Talkin Smokey 8 track", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/talkin-smokey-8-track/image_thumb", 
+                "text": "", 
+                "title": "Talkin Smokey 8 track", 
+                "type": "img", 
+                "width": "103"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/talkin-smokey-8-track/", 
+                "target": "_self", 
+                "text": "Talkin Smokey 8 track  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Talkin Smokey LP", 
+                "class": "imagen_galeria", 
+                "height": "63", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/talkin-smokey-lp/image_thumb", 
+                "text": "", 
+                "title": "Talkin Smokey LP", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/talkin-smokey-lp/", 
+                "target": "_self", 
+                "text": "Talkin Smokey LP  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Thats Truckdrivin 8 Track", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/thats-truckdrivin-8-track/image_thumb", 
+                "text": "", 
+                "title": "Thats Truckdrivin 8 Track", 
+                "type": "img", 
+                "width": "93"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/thats-truckdrivin-8-track/", 
+                "target": "_self", 
+                "text": "Thats Truckdrivin 8 Track  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "The best of CW McCall", 
+                "class": "imagen_galeria", 
+                "height": "44", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/the-best-of-cw-mccall/image_thumb", 
+                "text": "", 
+                "title": "The best of CW McCall", 
+                "type": "img", 
+                "width": "128"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/the-best-of-cw-mccall/", 
+                "target": "_self", 
+                "text": "The best of CW McCall  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "TXK no contesta (publicidad)", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/txk-no-contesta-publicidad/image_thumb", 
+                "text": "", 
+                "title": "TXK no contesta (publicidad)", 
+                "type": "img", 
+                "width": "81"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/txk-no-contesta-publicidad/", 
+                "target": "_self", 
+                "text": "TXK no contesta (publicidad)  ", 
+                "type": "a"
+            }, 
+            {
+                "alt": "Video EA3BKS", 
+                "class": "imagen_galeria", 
+                "height": "128", 
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/video-ea3bks/image_thumb", 
+                "text": "", 
+                "title": "Video EA3BKS", 
+                "type": "img", 
+                "width": "93"
+            }, 
+            {
+                "href": "http://www.museo-cb.com/museo-cb/audio-y-video/video-ea3bks/", 
+                "target": "_self", 
+                "text": "Video EA3BKS  ", 
+                "type": "a"
+            }, 
+            {
+                "href": "http://contadores.miarroba.com/ver.php?id=496376", 
+                "text": "", 
+                "type": "text/javascript"
+            }
+        ], 
+        "meta_tags": [
+            {
+                "content": "text/html;charset=utf-8", 
+                "http-equiv": "Content-Type"
+            }, 
+            {
+                "content": "Plone - http://plone.org", 
+                "name": "generator"
+            }, 
+            {
+                "content": "no", 
+                "http-equiv": "imagetoolbar"
+            }
+        ], 
+        "title": "\n        Frequency VHS\n        \u2014\n        MuseoCB\n    ", 
+        "type": "html-doc"
+    }, 
+    "content_len": 75888, 
+    "disposition": "SUCCESS", 
+    "download_size": 75888, 
+    "http_headers": {
+        "content-language": "es", 
+        "content-length": "75888", 
+        "content-type": "text/html;charset=utf-8", 
+        "date": "Thu, 09 Feb 2012 07:16:51 GMT", 
+        "expires": "Sat, 1 Jan 2000 00:00:00 GMT", 
+        "response": "HTTP/1.1 200 OK", 
+        "server": "Zope/(Zope 2.9.6-final, python 2.4.4, linux2) ZServer/1.1 Plone/2.5.2", 
+        "x-access-rule": "accessRule.py"
+    }, 
+    "http_result": 200, 
+    "md5": "2e0f38b51b67a159b29247317d787401", 
+    "mime_type": "text/html", 
+    "parsed_as": "html", 
+    "server_ip": "77.229.63.16", 
+    "text_simhash": 4442989078071069760
+}
