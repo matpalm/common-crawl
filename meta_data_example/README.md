@@ -56,7 +56,7 @@ first we get an example row from a metadata file
     $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null
      | head -n1 > meta_data_single_row.tsv
 
-then we feed it through a <a href="https://github.com/matpalm/common-crawl/blob/master/meta_data_example/links_extractor.py"links extraction script</a> which, in this simple case, just emits two columns; the source top level domain and the top level domain of each other link that's not the same. 
+then we feed it through a <a href="https://github.com/matpalm/common-crawl/blob/master/meta_data_example/links_extractor.py">links extraction script</a> which, in this simple case, just emits two columns; the source top level domain and the top level domain of each other link that's not the same. 
 
 for our simple example it's just the one link...
 
