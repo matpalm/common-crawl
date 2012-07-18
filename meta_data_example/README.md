@@ -35,7 +35,7 @@ meta data pretty simply...
     hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null \
      | head -n1 | cut -f2 | python -mjson.tool > meta_data_example.json
 
-the meta data file is included in this repo.
+<a href="meta_data_example.json">this meta data file</a> is included in this repo.
 
 
 
