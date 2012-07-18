@@ -12,8 +12,6 @@ first we need to know where to find the data. as described in the wiki the data 
       2012-07-08 01:32   5717068   s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-04379
       2012-07-08 01:32   5608750   s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-04380
 
-so for this segment there are 4381 meta data files totalling about 170gb. 
-
 since these files are hadoop sequence files, the easiest way to have a review them is using `hadoop fs -text`. 
 
 eg, from an elastic mapreduce cluster
@@ -51,21 +49,21 @@ or particular interest is the link section...
        ...
     }
 
-so if we want to do link analysis we just need to extract these.. 
+if we want to do link analysis we just need to extract these
 
-first we prototype a python script for doing it but getting an example row from a metadata file ...
+first we get an example row from a metadata file
 
     $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null
      | head -n1 > meta_data_single_row.tsv
 
-... then feeding it through a links extraction script which, in this simple case, just emits two columns; the source top level domain and the top level domain of each other link that's not the same. 
+then we feed it through a <a href="https://github.com/matpalm/common-crawl/blob/master/meta_data_example/links_extractor.py"links extraction script</a> which, in this simple case, just emits two columns; the source top level domain and the top level domain of each other link that's not the same. 
 
 for our simple example it's just the one link...
 
     $ ./links_extractor.py < meta_data_single_row.tsv 
     www.museo-cb.com       contadores.miarroba.com
 
-if we try a slightly larger dataset...
+trying a slightly larger dataset...
 
     $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null | head -n100 | gzip > meta_data.100.tsv.gz
     $ zcat meta_data.100.tsv.gz | ./links_extractor.py | sort | uniq -c | sort -nr | head
@@ -82,7 +80,7 @@ if we try a slightly larger dataset...
 
 so my naive top level domain extraction was as naive as i expected (ie very) but you get the idea...
 
-now that we have a working script we run it via hadoop streaming against a large dataset. let's just do the first metadata file.
+now that we have a working script we run it via hadoop streaming against an even larger dataset. let's just do the first metadata file.
 
     $ hadoop jar ./.versions/0.20.205/share/hadoop/contrib/streaming/hadoop-streaming.jar \
      -input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 \
@@ -91,7 +89,9 @@ now that we have a working script we run it via hadoop streaming against a large
      -mapper 'python links_extractor.py' \
      -file links_extractor.py
 
-which on a 3 node m1.small cluster takes 7 minutes. we've then got some link data to play with...
+changing the input to `-input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-*` would do the entire 170gb of the first segment (if you've got a bit enough cluster)
+
+we've then got some link data to play with...
 
     $ hadoop fs -ls metadata-00000.links.gz
      Found 6 items
