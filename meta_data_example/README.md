@@ -14,8 +14,6 @@ first we need to know where to find it. as described in the wiki it's chunked in
 
 since these files are hadoop sequence files, the easiest way to have a review them is using `hadoop fs -text`. 
 
-eg, from an elastic mapreduce cluster
-
     $ hadoop fs -text s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690147253/metadata-00000 2>/dev/null | head -n1
       http://www.museo-cb.com/museo-cb/audio-y-video/frequency-vhs/   {"attempt_time":1328767770376,"disposition":"SUCCESS","server_ip":"77.229.63.16","http_result":200,"http_headers":{"response":"HTTP/1.1 200 OK","server":"Zope/(Zope 2.9.6-final, python 2.4.4...
 
